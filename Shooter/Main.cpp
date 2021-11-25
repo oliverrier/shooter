@@ -1,8 +1,12 @@
-#include "MainMenu.h"
+#include "game.h"
 
 
 int main()
 
 {
-    return createMainMenu();
+    Game game;
+
+    game.run();
+
+    return 0;
 }
