@@ -1,11 +1,12 @@
-#include <SFML/Graphics.hpp>
+#include "game.h"
 
-int main() {
-	sf::RenderWindow window(sf::VideoMode(600, 600), "SFML Fonctionne !");
-	while (window.isOpen()) {
-		window.clear(sf::Color::Black);
-		sf::RectangleShape rs(sf::Vector2f(100, 100));
-		window.draw(rs);
-		window.display();
-	}
+
+int main()
+
+{
+    Game game;
+
+    game.run();
+
+    return 0;
 }
