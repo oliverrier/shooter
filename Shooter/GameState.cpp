@@ -1,7 +1,7 @@
  #include "GameState.h"
 
 
-GameState::GameState(sf::RenderWindow* window) : State(window)
+GameState::GameState(sf::RenderWindow* window, std::stack<State*>* states ) : State(window, states)
 {
 }
 
@@ -32,6 +32,7 @@ void GameState::updateInput(const float& dt)
 
 void GameState::update(const float& dt)
 {
+	this->updateMousePosition();
 	this->updateInput(dt);
 	
 	this->Player.update(dt);

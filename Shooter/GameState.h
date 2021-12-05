@@ -10,7 +10,7 @@ private:
     Entity Player;
 
 public:
-    GameState(sf::RenderWindow* window);
+    GameState(sf::RenderWindow* window, std::stack<State*>* states);
     virtual ~GameState();
 
     // functions

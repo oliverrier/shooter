@@ -9,7 +9,7 @@ Game::Game() {
 Game::~Game() {
 	delete this->window;
 
-	while (this->states.empty()) {
+	while (!this->states.empty()) {
 		delete this->states.top();
 		this->states.pop();
 	}
@@ -30,8 +30,7 @@ void Game::initWindow() {
 
 void Game::initStates()
 {
-	this->states.push(new MainMenuState(this->window));
-	this->states.push(new GameState(this->window));
+	this->states.push(new MainMenuState(this->window, &this->states));
 }
 
 void Game::endApplication()
