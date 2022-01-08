@@ -2,10 +2,10 @@
 
 
 
-CGameState::CGameState(sf::RenderWindow* Window, std::stack<CState*>* States ) : CState(Window, States)
+CGameState::CGameState(sf::RenderWindow* window, std::stack<CState*>* states ) : CState(window, states)
 {
-	this->InitTextures();
-	this->InitPlayer();
+	InitTextures();
+	InitPlayer();
 }
 
 CGameState::~CGameState()
@@ -16,14 +16,14 @@ CGameState::~CGameState()
 //inits 
 void CGameState::InitTextures()
 {
-	if(!this-> Textures["PLAYER_IDLE"].loadFromFile("asset/sprite/spaceship/spaceship-1.png"))
+	if(! Textures["PLAYER_IDLE"].loadFromFile("asset/sprite/spaceship/spaceship-1.png"))
 		throw "ERROR::GAME_STATE::COULD_NOT_LOAD_PLAYER_IDLE_TEXTURE";
 }
 
 
 void CGameState::InitPlayer()
 {
-	Spaceship = new CSpaceship(0, 0, this->Textures["PLAYER_IDLE"]);
+	Spaceship = new CSpaceship(0, 0, Textures["PLAYER_IDLE"]);
 }
 
 
@@ -42,13 +42,13 @@ void CGameState::UpdateInput(const float& dt)
 		Spaceship->Move(dt, 0.f, 5.f);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-		this->EndState();
+		EndState();
 }
 
 void CGameState::Update(const float& dt)
 {
-	this->UpdateMousePosition();
-	this->UpdateInput(dt);
+	UpdateMousePosition();
+	UpdateInput(dt);
 	
 	Spaceship->Update(dt);
 }
@@ -56,7 +56,7 @@ void CGameState::Update(const float& dt)
 void CGameState::Render(sf::RenderTarget* target)
 {
 	if (!target)
-		target = this->Window;
+		target = Window;
 
 	Spaceship->Render(target );
 }

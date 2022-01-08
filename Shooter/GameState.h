@@ -14,7 +14,7 @@ private:
     void InitPlayer();
 
 public:
-    CGameState(sf::RenderWindow* Window, std::stack<CState*>* States);
+    CGameState(sf::RenderWindow* window, std::stack<CState*>* states);
     virtual ~CGameState();
 
 

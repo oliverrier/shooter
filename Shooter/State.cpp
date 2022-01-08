@@ -1,10 +1,10 @@
 #include "State.h"
 
 
-CState::CState(sf::RenderWindow* Window, std::stack<CState*>* States) {
-	this->Window = Window;
-	this->Quit = false;
-	this->States = States;
+CState::CState(sf::RenderWindow* window, std::stack<CState*>* states) {
+	Window = window;
+	Quit = false;
+	States = states;
 }
 
 CState::~CState() {
@@ -13,19 +13,19 @@ CState::~CState() {
 
 const bool& CState::GetQuit() const
 {
-	return this->Quit;
+	return Quit;
 }
 
 void CState::EndState()
 {
-	this->Quit = true;
+	Quit = true;
 }
 
 
 void CState::UpdateMousePosition()
 {
-	this->MousePosScreen = sf::Mouse::getPosition();
-	this->MousePosWindow = sf::Mouse::getPosition(*this->Window);
-	this->MousePosView = this->Window->mapPixelToCoords(sf::Mouse::getPosition(*this->Window));
+	MousePosScreen = sf::Mouse::getPosition();
+	MousePosWindow = sf::Mouse::getPosition(*Window);
+	MousePosView = Window->mapPixelToCoords(sf::Mouse::getPosition(*Window));
 }
 

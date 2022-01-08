@@ -2,16 +2,16 @@
 
 // contructors - destructor
 CGame::CGame() {
-	this->InitWindow();
-	this->InitStates();
+	InitWindow();
+	InitStates();
 }
 
 CGame::~CGame() {
-	delete this->Window;
+	delete Window;
 
-	while (!this->States.empty()) {
-		delete this->States.top();
-		this->States.pop();
+	while (!States.empty()) {
+		delete States.top();
+		States.pop();
 	}
 }
 
@@ -21,16 +21,16 @@ CGame::~CGame() {
 void CGame::InitWindow() {
 
 	// retrieves information from the screen
-	this->DesktopMode = sf::VideoMode::getDesktopMode();
+	DesktopMode = sf::VideoMode::getDesktopMode();
 
 	// create the window 
-	this->Window = new sf::RenderWindow(sf::VideoMode(1920, 1080, this->DesktopMode.bitsPerPixel), "DOOM 2D");
-	this->Window->setVerticalSyncEnabled(true);
+	Window = new sf::RenderWindow(sf::VideoMode(1920, 1080, DesktopMode.bitsPerPixel), "DOOM 2D");
+	Window->setVerticalSyncEnabled(true);
 }
 
 void CGame::InitStates()
 {
-	this->States.push(new CMainMenuState(this->Window, &this->States));
+	States.push(new CMainMenuState(Window, &States));
 }
 
 void CGame::EndApplication()
@@ -40,55 +40,55 @@ void CGame::EndApplication()
 
 void CGame::UpdateDeltaTime() {
 	// retrieves the time elapsed since the last restart and thus the last frame 
-	this->DeltaTime = this->DeltaTimeClock.restart().asSeconds();
+	DeltaTime = DeltaTimeClock.restart().asSeconds();
 }
 
 void CGame::UpdateSFMLEvents() {
 
-	while (this->Window->pollEvent(this->SfEvent)) {
-		if (this->SfEvent.type == sf::Event::Closed)
-			this->Window->close();
+	while (Window->pollEvent(SfEvent)) {
+		if (SfEvent.type == sf::Event::Closed)
+			Window->close();
 	}
 }
 
 
 
 void CGame::Update() {
-	this->UpdateSFMLEvents();
+	UpdateSFMLEvents();
 
-	if (!this->States.empty()) {
-		this->States.top()->Update(this->DeltaTime);
+	if (!States.empty()) {
+		States.top()->Update(DeltaTime);
 
-		if (this->States.top()->GetQuit()) {
-			this->States.top()->EndState();
-			delete this->States.top();
-			this->States.pop();
+		if (States.top()->GetQuit()) {
+			States.top()->EndState();
+			delete States.top();
+			States.pop();
 		}
 	}
 	//Application end
 	else {
-		this->EndApplication();
-		this->Window->close();
+		EndApplication();
+		Window->close();
 	}
 
 }
 
 void CGame::Render() {
-	this->Window->clear();
+	Window->clear();
 
 	// render items
-	if (!this->States.empty())
-		this->States.top()->Render(this->Window); 
+	if (!States.empty())
+		States.top()->Render(Window); 
 
-	this->Window->display();
+	Window->display();
 }
 
 
 void CGame::Run() {
-	while (this->Window->isOpen()) {
-		this->UpdateDeltaTime();
-		this->Update();
-		this->Render();
+	while (Window->isOpen()) {
+		UpdateDeltaTime();
+		Update();
+		Render();
 	 }
 }
 

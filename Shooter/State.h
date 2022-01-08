@@ -18,7 +18,7 @@ protected:
 	sf::Vector2f MousePosView;
 
 public:
-	CState(sf::RenderWindow* Window, std::stack<CState*>* States);
+	CState(sf::RenderWindow* window, std::stack<CState*>* states);
 	virtual ~CState();
 
 	const bool& GetQuit() const;

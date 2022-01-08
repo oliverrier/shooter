@@ -34,7 +34,7 @@ class CButton
 
 	public:
 		// Constructors
-		CButton(float x, float y, float width, float height, sf::Font* Font, std::string Text, sf::Color IdleColor, sf::Color HoverColor, sf::Color ActiveColor);
+		CButton(float x, float y, float width, float height, sf::Font* Font, std::string text, sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor);
 		~CButton();
 
 		//Accessors

@@ -15,7 +15,7 @@ public:
 
 	//Component functions
 	void SetTexture(sf::Texture& texture);
-	void CreateMovementComponent(const float MaxVelocity);
+	void CreateMovementComponent(const float maxVelocity);
 
 	//Functions
 	virtual void SetPosition(const float x, const float y);

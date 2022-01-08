@@ -27,7 +27,7 @@ private:
 
 public:
 
-    CMainMenuState(sf::RenderWindow* Window, std::stack<CState*>* states);
+    CMainMenuState(sf::RenderWindow* window, std::stack<CState*>* states);
     virtual ~CMainMenuState();
 
     void UpdateInput(const float& dt);

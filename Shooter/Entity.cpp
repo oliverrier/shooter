@@ -16,27 +16,27 @@ CEntity::~CEntity()
 
 void CEntity::SetTexture(sf::Texture& texture)
 {
-	this->Sprite.setTexture(texture);
+	Sprite.setTexture(texture);
 }
 
 
-void CEntity::CreateMovementComponent(const float MaxVelocity)
+void CEntity::CreateMovementComponent(const float maxVelocity)
 {
-	this->MovementComponent = new CMovementComponent(this->Sprite, MaxVelocity);
+	MovementComponent = new CMovementComponent(Sprite, maxVelocity);
 }
 
 // Functions
 void CEntity::Move(const float dt, const float dirX, const float dirY)
 {
-	if (this->MovementComponent)
+	if (MovementComponent)
 	{
-		this->MovementComponent->Move(dirX, dirY, dt); // Sets velocity
+		MovementComponent->Move(dirX, dirY, dt); // Sets velocity
 	}
 }
 
 void CEntity::SetPosition(const float x, const float y)
 {
-		this->Sprite.setPosition(x, y);
+		Sprite.setPosition(x, y);
 }
 
 void CEntity::Update(const float& dt)
@@ -46,5 +46,5 @@ void CEntity::Update(const float& dt)
 
 void CEntity::Render(sf::RenderTarget* target)
 {
-	    target->draw(this->Sprite);
+	    target->draw(Sprite);
 }

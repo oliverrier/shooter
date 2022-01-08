@@ -4,9 +4,9 @@
 
 CSpaceship::CSpaceship(float x, float y, sf::Texture& texture)
 {
-	this->InitComponents();
-	this->SetTexture(texture);
-	this->SetPosition(x, y);
+	InitComponents();
+	SetTexture(texture);
+	SetPosition(x, y);
 }
 
 CSpaceship::~CSpaceship()
@@ -15,5 +15,5 @@ CSpaceship::~CSpaceship()
 
 void CSpaceship::InitComponents()
 {
-	this->CreateMovementComponent(100.f);
+	CreateMovementComponent(100.f);
 }
