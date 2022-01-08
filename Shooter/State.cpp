@@ -1,24 +1,28 @@
 #include "State.h"
 
 
-State::State(sf::RenderWindow* window) {
-	this->window = window;
-	this->quit = false;
+CState::CState(sf::RenderWindow* window, std::stack<CState*>* states): Window(window), Quit(false),States(states) {
 }
 
-State::~State() {
+CState::~CState() {
 
 }
 
-void State::checkForQuit()
+const bool& CState::GetQuit() const
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-	{
-		this->quit = true;
-	}
+	return Quit;
 }
 
-const bool& State::getQuit() const
+void CState::EndState()
 {
-	return this->quit;
+	Quit = true;
 }
+
+
+void CState::UpdateMousePosition()
+{
+	MousePosScreen = sf::Mouse::getPosition();
+	MousePosWindow = sf::Mouse::getPosition(*Window);
+	MousePosView = Window->mapPixelToCoords(sf::Mouse::getPosition(*Window));
+}
+

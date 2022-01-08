@@ -1,31 +1,28 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <iostream>
-#include<stack>
-#include<vector>
-#include<map>
-
-//SFML
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
+#include "MovementComponent.h"
  
-class Entity
+class CEntity
 {
-private:
 protected:
-	sf::RectangleShape shape;
-	float movementSpeed;
+	sf::Sprite Sprite;
 
+	CMovementComponent* MovementComponent;
 public:
-	Entity();
-	virtual ~Entity();
+	CEntity();
+	virtual ~CEntity();
+
+	//Component functions
+	void SetTexture(sf::Texture& texture);
+	void CreateMovementComponent(const float maxVelocity);
 
 	//Functions
-	virtual void move(const float dt, const float dirX, const float dirY);
+	virtual void SetPosition(const float x, const float y);
+	virtual void Move(const float dt, const float dirX, const float dirY);
 
-	virtual void update(const float& dt);
-	virtual void render(sf::RenderTarget* target);
+	virtual void Update(const float& dt);
+	virtual void Render(sf::RenderTarget* target);
 
 };
 

@@ -2,36 +2,47 @@
 #define BUTTON_H
 
 #include <iostream>
+#include<stack>
+#include<vector>
+//#include<map>
+
+//SFML
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+
+enum button_states{BTN_IDLE = 0, BTN_HOVER, BTN_ACTIVE};
+
 
 using namespace std;
 
-class Button
+class CButton
 {
 	private:
-		sf::RectangleShape base;        
+		short unsigned ButtonState;
 
-		sf::Text text;
-		sf::Text textHover;
+		sf::RectangleShape Shape;        
+		sf::Font* Font;
+		sf::Text Text;
 
-		sf::Color baseColor;
-		sf::Color baseColorHover;
+
+
+		sf::Color IdleColor;
+		sf::Color HoverColor;
+		sf::Color ActiveColor;
+
 
 
 	public:
 		// Constructors
-		Button(sf::Vector2f position, sf::Vector2f size, sf::Text text, sf::Text textHover, sf::Color backgroundColor, sf::Color backgroundColorHover);
+		CButton(float x, float y, float width, float height, sf::Font* Font, std::string text, sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor);
+		~CButton();
 
-		//getters and setters
-		void setText(sf::Text text);
-		sf::Text getText() const;
+		//Accessors
+		const bool IsPressed() const;
 
-	
-
-		//others methods
-		void setPosition(sf::Vector2f vector2f);
-
-		void draw(sf::RenderWindow& window);
+		//Functions
+		void Update(const sf::Vector2f mousePos);
+		void Render(sf::RenderTarget* target);
 
 };
 

@@ -3,27 +3,37 @@
 
 
 #include "GameState.h"
-class MainMenuState :
-    public State
+#include "Button.h"
+ 
+ 
+class CMainMenuState :
+    public CState
 {
 
 private:
     //variables
-    sf::RectangleShape background;
+    sf::Texture TextureBackground;
+    sf::RectangleShape Background;
+    sf::Font Font;
+
+    std::map<std::string, CButton*> Buttons;
+
+    //Functions
+    void InitBackground();
+    void InitFonts();
+    void InitButtons();
 
 
 public:
 
-    MainMenuState(sf::RenderWindow* window);
-    virtual ~MainMenuState();
+    CMainMenuState(sf::RenderWindow* window, std::stack<CState*>* states);
+    virtual ~CMainMenuState();
 
-    // functions
-    void endState();
-
-    virtual void updateInput(const float& dt);
-
-    void update(const float& dt);
-    void render(sf::RenderTarget* target = NULL);
+    void UpdateInput(const float& dt);
+    void UpdateButtons();
+    void RenderButtons(sf::RenderTarget* target = NULL);
+    void Update(const float& dt);
+    void Render(sf::RenderTarget* target = NULL);
 };
 
 #endif

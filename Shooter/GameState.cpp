@@ -1,46 +1,62 @@
  #include "GameState.h"
 
 
-GameState::GameState(sf::RenderWindow* window) : State(window)
+
+CGameState::CGameState(sf::RenderWindow* window, std::stack<CState*>* states ) : CState(window, states), Spaceship()
 {
+	InitTextures();
+	InitPlayer();
 }
 
-GameState::~GameState()
+CGameState::~CGameState()
 {
+	delete Spaceship;
+}
+
+//inits 
+void CGameState::InitTextures()
+{
+	if(! Textures["PLAYER_IDLE"].loadFromFile("asset/sprite/spaceship/spaceship-1.png"))
+		throw "ERROR::GAME_STATE::COULD_NOT_LOAD_PLAYER_IDLE_TEXTURE";
 }
 
 
-void GameState::endState()
+void CGameState::InitPlayer()
 {
-	std::cout << "Ending GameState" << std::endl;
+	Spaceship = new CSpaceship(0, 0, Textures["PLAYER_IDLE"]);
 }
 
-void GameState::updateInput(const float& dt)
+
+//functions
+void CGameState::UpdateInput(const float& dt)
 {
-	this->checkForQuit();
 
 	//Update player input
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-		this->Player.move(dt, -1.f, 0.f);
+		Spaceship->Move(dt, -5.f, 0.f);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		this->Player.move(dt, 1.f, 0.f);
+		Spaceship->Move(dt, 5.f, 0.f);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-		this->Player.move(dt, 0.f, -1.f);
+		Spaceship->Move(dt, 0.f, -5.f);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		this->Player.move(dt, 0.f, 1.f);
+		Spaceship->Move(dt, 0.f, 5.f);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+		EndState();
 }
 
-void GameState::update(const float& dt)
+void CGameState::Update(const float& dt)
 {
-	this->updateInput(dt);
+	UpdateMousePosition();
+	UpdateInput(dt);
 	
-	this->Player.update(dt);
+	Spaceship->Update(dt);
 }
 
-void GameState::render(sf::RenderTarget* target)
+void CGameState::Render(sf::RenderTarget* target)
 {
 	if (!target)
-		target = this->window;
+		target = Window;
 
-    this->Player.render(target );	
+	Spaceship->Render(target );
 }
