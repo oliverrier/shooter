@@ -5,6 +5,7 @@
 CGameState::CGameState(sf::RenderWindow* window, std::stack<CState*>* states ) : CState(window, states), Spaceship()
 {
 	InitTextures();
+	InitMusic();
 	InitPlayer();
 }
 
@@ -20,6 +21,14 @@ void CGameState::InitTextures()
 		throw "ERROR::GAME_STATE::COULD_NOT_LOAD_PLAYER_IDLE_TEXTURE";
 }
 
+
+void CGameState::InitMusic() {
+	// Load a music to play
+	if (!Music.openFromFile("asset/musics/r-type-final-2-ost-investigation-abandoned-space-city.wav"))
+		throw "ERROR:MAIN_MENU_STATE::FAILED_TO_LOAD_MUSIC";
+	Music.setLoop(true);
+	Music.play();
+}
 
 void CGameState::InitPlayer()
 {

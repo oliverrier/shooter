@@ -12,6 +12,7 @@ class CMainMenuState :
 
 private:
     //variables
+    sf::Music Music;
     sf::Texture TextureBackground;
     sf::RectangleShape Background;
     sf::Font Font;
@@ -20,6 +21,7 @@ private:
 
     //Functions
     void InitBackground();
+    void InitMusic();
     void InitFonts();
     void InitButtons();
 

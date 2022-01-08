@@ -4,16 +4,15 @@
 
 CSpaceship::CSpaceship(float x, float y, sf::Texture& texture)
 {
-	InitComponents();
 	SetTexture(texture);
+	Sprite.setScale(0.5, 0.5);
 	SetPosition(x, y);
+
+	CreateMovementComponent(50.f);
+
 }
 
 CSpaceship::~CSpaceship()
 {
 }
 
-void CSpaceship::InitComponents()
-{
-	CreateMovementComponent(100.f);
-}

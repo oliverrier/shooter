@@ -22,6 +22,12 @@
     <Filter Include="Components">
       <UniqueIdentifier>{4d79122d-a425-43e8-9dc9-3c6fec3f4193}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities\Weapons">
+      <UniqueIdentifier>{8bfa9bd1-97e0-4daf-91a9-93074a4d7773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Weapons\Bullets">
+      <UniqueIdentifier>{86b593b9-0251-4b1a-93e1-2f010506f917}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -51,6 +57,9 @@
     <ClCompile Include="Spaceship.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="CWeapon.cpp">
+      <Filter>Entities\Weapons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -76,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="CWeapon.h">
+      <Filter>Entities\Weapons</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

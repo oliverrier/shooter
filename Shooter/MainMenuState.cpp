@@ -3,9 +3,9 @@
 CMainMenuState::CMainMenuState(sf::RenderWindow* window, std::stack<CState*>* states) : CState(window, states)
 {
 	InitBackground();
+	InitMusic();
 	InitFonts();
 	InitButtons();
-
 
 }
 
@@ -30,6 +30,13 @@ void CMainMenuState::InitBackground()
 
 	Background.setTexture(&TextureBackground);
 	
+}
+
+void CMainMenuState::InitMusic() {
+	// Load a music to play
+	if (!Music.openFromFile("asset/musics/R-Type_Final_2_Main_Menu.wav"))
+		throw "ERROR:MAIN_MENU_STATE::FAILED_TO_LOAD_MUSIC";
+	Music.setLoop(true);
 }
 
 
@@ -62,6 +69,7 @@ void CMainMenuState::UpdateButtons()
 	//Play
 	if (Buttons["GAME_STATE"]->IsPressed())
 	{
+		Music.stop();
 		States->push(new CGameState(Window, States));
 	}
 
@@ -85,17 +93,19 @@ void CMainMenuState::RenderButtons(sf::RenderTarget* target)
 void CMainMenuState::UpdateInput(const float& dt)
 {
 
-
 }
 
 void CMainMenuState::Update(const float& dt)
 {
+	if (Music.getStatus() == sf::SoundSource::Status::Stopped)
+	{
+		Music.play();
+	}
+
 	UpdateInput(dt);
 	UpdateMousePosition();
 
 	UpdateButtons();
-
-
 }
 
 

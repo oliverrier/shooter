@@ -7,10 +7,13 @@ class CGameState : public CState
 {
 
 private:
+    sf::Music Music;
+
     CSpaceship* Spaceship;
 
     //functions
     void InitTextures();
+    void InitMusic();
     void InitPlayer();
 
 public:
