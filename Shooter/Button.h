@@ -15,34 +15,34 @@ enum button_states{BTN_IDLE = 0, BTN_HOVER, BTN_ACTIVE};
 
 using namespace std;
 
-class Button
+class CButton
 {
 	private:
-		short unsigned buttonState;
+		short unsigned ButtonState;
 
-		sf::RectangleShape shape;        
-		sf::Font* font;
-		sf::Text text;
+		sf::RectangleShape Shape;        
+		sf::Font* Font;
+		sf::Text Text;
 
 
 
-		sf::Color idleColor;
-		sf::Color hoverColor;
-		sf::Color activeColor;
+		sf::Color IdleColor;
+		sf::Color HoverColor;
+		sf::Color ActiveColor;
 
 
 
 	public:
 		// Constructors
-		Button(float x, float y, float width, float height, sf::Font* font, std::string text, sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor);
-		~Button();
+		CButton(float x, float y, float width, float height, sf::Font* Font, std::string Text, sf::Color IdleColor, sf::Color HoverColor, sf::Color ActiveColor);
+		~CButton();
 
 		//Accessors
-		const bool isPressed() const;
+		const bool IsPressed() const;
 
 		//Functions
-		void update(const sf::Vector2f mousePos);
-		void render(sf::RenderTarget* target);
+		void Update(const sf::Vector2f mousePos);
+		void Render(sf::RenderTarget* target);
 
 };
 

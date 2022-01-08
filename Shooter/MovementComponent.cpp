@@ -1,32 +1,32 @@
 #include "MovementComponent.h"
 
-MovementComponent::MovementComponent(sf::Sprite& sprite, float maxVelocity): sprite(sprite), maxVelocity(maxVelocity)
+CMovementComponent::CMovementComponent(sf::Sprite& Sprite, float MaxVelocity): Sprite(Sprite), MaxVelocity(MaxVelocity)
 {
 }
 
-MovementComponent::~MovementComponent()
+CMovementComponent::~CMovementComponent()
 {
 }
 
 
 //functions
-void MovementComponent::move(const float dirX, const float dirY, const float& dt)
+void CMovementComponent::Move(const float dirX, const float dirY, const float& dt)
 {
-	this->velocity.x = this->maxVelocity * dirX;
-	this->velocity.y = this->maxVelocity * dirY;
+	this->Velocity.x = this->MaxVelocity * dirX;
+	this->Velocity.y = this->MaxVelocity * dirY;
 
-	this->sprite.move(this->velocity * dt); // Uses velocity
+	this->Sprite.move(this->Velocity * dt); // Uses velocity
 
 }
 
-void MovementComponent::update(const float& dt)
+void CMovementComponent::Update(const float& dt)
 {
 }
 
 
 
-const sf::Vector2f& MovementComponent::getVelocity() const
+const sf::Vector2f& CMovementComponent::GetVelocity() const
 {
-	return this->velocity;
+	return this->Velocity;
 }
 

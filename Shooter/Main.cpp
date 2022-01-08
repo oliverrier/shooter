@@ -1,12 +1,12 @@
-#include "game.h"
+#include "Game.h"
 
 
 int main()
 
 {
-    Game game;
+    CGame game;
 
-    game.run();
+    game.Run();
 
     return 0;
 }

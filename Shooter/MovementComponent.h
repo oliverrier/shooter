@@ -10,29 +10,29 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
-class MovementComponent
+class CMovementComponent
 {
 private:
-	sf::Sprite& sprite;
+	sf::Sprite& Sprite;
 
-	float maxVelocity;
+	float MaxVelocity;
 
-	sf::Vector2f velocity;
-	sf::Vector2f acceleration;
-	sf::Vector2f deceleration;
+	sf::Vector2f Velocity;
+	sf::Vector2f Acceleration;
+	sf::Vector2f Deceleration;
 	// Initializer functions
 
 
 public:
-	MovementComponent(sf::Sprite& sprite, float maxVelocity);
-	virtual ~MovementComponent();
+	CMovementComponent(sf::Sprite& sprite, float maxVelocity);
+	virtual ~CMovementComponent();
 
 	//accessors
-	const sf::Vector2f& getVelocity() const;
+	const sf::Vector2f& GetVelocity() const;
 
 	//functions
-	void move(const float dirX, const float dirY, const float& dt);
-	void update(const float& dt);
+	void Move(const float dirX, const float dirY, const float& dt);
+	void Update(const float& dt);
 };
 
 #endif

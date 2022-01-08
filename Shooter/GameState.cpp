@@ -2,61 +2,61 @@
 
 
 
-GameState::GameState(sf::RenderWindow* window, std::stack<State*>* states ) : State(window, states)
+CGameState::CGameState(sf::RenderWindow* Window, std::stack<CState*>* States ) : CState(Window, States)
 {
-	this->initTextures();
-	this->initPlayer();
+	this->InitTextures();
+	this->InitPlayer();
 }
 
-GameState::~GameState()
+CGameState::~CGameState()
 {
-	delete this->player;
+	delete Spaceship;
 }
 
 //inits 
-void GameState::initTextures()
+void CGameState::InitTextures()
 {
-	if(!this-> textures["PLAYER_IDLE"].loadFromFile("asset/sprite/spaceship/spaceship-1.png"))
+	if(!this-> Textures["PLAYER_IDLE"].loadFromFile("asset/sprite/spaceship/spaceship-1.png"))
 		throw "ERROR::GAME_STATE::COULD_NOT_LOAD_PLAYER_IDLE_TEXTURE";
 }
 
 
-void GameState::initPlayer()
+void CGameState::InitPlayer()
 {
-	this->player = new Player(0, 0, this->textures["PLAYER_IDLE"]);
+	Spaceship = new CSpaceship(0, 0, this->Textures["PLAYER_IDLE"]);
 }
 
 
 //functions
-void GameState::updateInput(const float& dt)
+void CGameState::UpdateInput(const float& dt)
 {
 
 	//Update player input
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-		this->player->move(dt, -5.f, 0.f);
+		Spaceship->Move(dt, -5.f, 0.f);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		this->player->move(dt, 5.f, 0.f);
+		Spaceship->Move(dt, 5.f, 0.f);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-		this->player->move(dt, 0.f, -5.f);
+		Spaceship->Move(dt, 0.f, -5.f);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		this->player->move(dt, 0.f, 5.f);
+		Spaceship->Move(dt, 0.f, 5.f);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-		this->endState();
+		this->EndState();
 }
 
-void GameState::update(const float& dt)
+void CGameState::Update(const float& dt)
 {
-	this->updateMousePosition();
-	this->updateInput(dt);
+	this->UpdateMousePosition();
+	this->UpdateInput(dt);
 	
-	this->player->update(dt);
+	Spaceship->Update(dt);
 }
 
-void GameState::render(sf::RenderTarget* target)
+void CGameState::Render(sf::RenderTarget* target)
 {
 	if (!target)
-		target = this->window;
+		target = this->Window;
 
-    this->player->render(target );
+	Spaceship->Render(target );
 }

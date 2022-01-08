@@ -3,18 +3,18 @@
 
 
 #include "Entity.h"
-class Player :
-    public Entity
+class CSpaceship :
+    public CEntity
 {
 private:
     //Variabmles
 
     //Initializer functions
-    void initComponents();
+    void InitComponents();
 
 public:
-    Player(float x, float y, sf::Texture& texture);
-    virtual ~Player();
+    CSpaceship(float x, float y, sf::Texture& texture);
+    virtual ~CSpaceship();
 
     //Functions
 };

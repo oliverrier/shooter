@@ -48,7 +48,7 @@
     <ClCompile Include="MovementComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="Spaceship.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,7 +74,7 @@
     <ClInclude Include="MovementComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="Spaceship.h">
       <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>

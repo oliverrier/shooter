@@ -1,94 +1,94 @@
 #include "Game.h"
 
 // contructors - destructor
-Game::Game() {
-	this->initWindow();
-	this->initStates();
+CGame::CGame() {
+	this->InitWindow();
+	this->InitStates();
 }
 
-Game::~Game() {
-	delete this->window;
+CGame::~CGame() {
+	delete this->Window;
 
-	while (!this->states.empty()) {
-		delete this->states.top();
-		this->states.pop();
+	while (!this->States.empty()) {
+		delete this->States.top();
+		this->States.pop();
 	}
 }
 
 
 // functions
 
-void Game::initWindow() {
+void CGame::InitWindow() {
 
 	// retrieves information from the screen
-	this->desktopMode = sf::VideoMode::getDesktopMode();
+	this->DesktopMode = sf::VideoMode::getDesktopMode();
 
 	// create the window 
-	this->window = new sf::RenderWindow(sf::VideoMode(1920, 1080, this->desktopMode.bitsPerPixel), "DOOM 2D");
-	this->window->setVerticalSyncEnabled(true);
+	this->Window = new sf::RenderWindow(sf::VideoMode(1920, 1080, this->DesktopMode.bitsPerPixel), "DOOM 2D");
+	this->Window->setVerticalSyncEnabled(true);
 }
 
-void Game::initStates()
+void CGame::InitStates()
 {
-	this->states.push(new MainMenuState(this->window, &this->states));
+	this->States.push(new CMainMenuState(this->Window, &this->States));
 }
 
-void Game::endApplication()
+void CGame::EndApplication()
 {
 	std::cout << "Ending Application" << std::endl;
 }
 
-void Game::updateDeltaTime() {
+void CGame::UpdateDeltaTime() {
 	// retrieves the time elapsed since the last restart and thus the last frame 
-	this->deltaTime = this->deltaTimeClock.restart().asSeconds();
+	this->DeltaTime = this->DeltaTimeClock.restart().asSeconds();
 }
 
-void Game::updateSFMLEvents() {
+void CGame::UpdateSFMLEvents() {
 
-	while (this->window->pollEvent(this->sfEvent)) {
-		if (this->sfEvent.type == sf::Event::Closed)
-			this->window->close();
+	while (this->Window->pollEvent(this->SfEvent)) {
+		if (this->SfEvent.type == sf::Event::Closed)
+			this->Window->close();
 	}
 }
 
 
 
-void Game::update() {
-	this->updateSFMLEvents();
+void CGame::Update() {
+	this->UpdateSFMLEvents();
 
-	if (!this->states.empty()) {
-		this->states.top()->update(this->deltaTime);
+	if (!this->States.empty()) {
+		this->States.top()->Update(this->DeltaTime);
 
-		if (this->states.top()->getQuit()) {
-			this->states.top()->endState();
-			delete this->states.top();
-			this->states.pop();
+		if (this->States.top()->GetQuit()) {
+			this->States.top()->EndState();
+			delete this->States.top();
+			this->States.pop();
 		}
 	}
 	//Application end
 	else {
-		this->endApplication();
-		this->window->close();
+		this->EndApplication();
+		this->Window->close();
 	}
 
 }
 
-void Game::render() {
-	this->window->clear();
+void CGame::Render() {
+	this->Window->clear();
 
 	// render items
-	if (!this->states.empty())
-		this->states.top()->render(this->window); 
+	if (!this->States.empty())
+		this->States.top()->Render(this->Window); 
 
-	this->window->display();
+	this->Window->display();
 }
 
 
-void Game::run() {
-	while (this->window->isOpen()) {
-		this->updateDeltaTime();
-		this->update();
-		this->render();
+void CGame::Run() {
+	while (this->Window->isOpen()) {
+		this->UpdateDeltaTime();
+		this->Update();
+		this->Render();
 	 }
 }
 

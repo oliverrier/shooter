@@ -3,25 +3,25 @@
 
 
 #include "State.h"
-class GameState : public State
+class CGameState : public CState
 {
 
 private:
-    Player* player;
+    CSpaceship* Spaceship;
 
     //functions
-    void initTextures();
-    void initPlayer();
+    void InitTextures();
+    void InitPlayer();
 
 public:
-    GameState(sf::RenderWindow* window, std::stack<State*>* states);
-    virtual ~GameState();
+    CGameState(sf::RenderWindow* Window, std::stack<CState*>* States);
+    virtual ~CGameState();
 
 
-    virtual void updateInput(const float& dt);
+    virtual void UpdateInput(const float& dt);
 
-    void update(const float& dt);
-    void render(sf::RenderTarget* target = NULL);
+    void Update(const float& dt);
+    void Render(sf::RenderTarget* target = NULL);
 
 };
 

@@ -1,116 +1,115 @@
-
 #include "MainMenuState.h"
 
-MainMenuState::MainMenuState(sf::RenderWindow* window, std::stack<State*>* states) : State(window, states)
+CMainMenuState::CMainMenuState(sf::RenderWindow* Window, std::stack<CState*>* States) : CState(Window, States)
 {
-	this->initVariables();
-	this->initBackground();
-	this->initFonts();
-	this->initButtons();
+	this->InitVariables();
+	this->InitBackground();
+	this->InitFonts();
+	this->InitButtons();
 
 
 }
 
-MainMenuState::~MainMenuState()
+CMainMenuState::~CMainMenuState()
 {
-	auto iterator = this->buttons.begin();
+	auto iterator = this->Buttons.begin();
 
-	for (iterator = this->buttons.begin(); iterator != this->buttons.end(); ++iterator)
+	for (iterator = this->Buttons.begin(); iterator != this->Buttons.end(); ++iterator)
 	{
 		delete iterator->second;
 	}
 }
 
 
-void MainMenuState::initVariables()
+void CMainMenuState::InitVariables()
 {
 }
 
-void MainMenuState::initBackground()
+void CMainMenuState::InitBackground()
 {
-	this->background.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
+	this->Background.setSize(sf::Vector2f(Window->getSize().x, Window->getSize().y));
 
-	if (!textureBackground.loadFromFile("asset/sprite/menu/mainMenu/wallpaper.png"))
+	if (!TextureBackground.loadFromFile("asset/sprite/menu/mainMenu/wallpaper.png"))
 		throw "ERROR:MAIN_MENU_STATE::FAILED_TO_LOAD_BACKGROUND_TEXTURE";
 
-	this->background.setTexture(&this->textureBackground);
+	this->Background.setTexture(&this->TextureBackground);
 	
 }
 
 
-void MainMenuState::initFonts()
+void CMainMenuState::InitFonts()
 {
-	if (!this->font.loadFromFile("asset/font/Space.ttf")) {
+	if (!this->Font.loadFromFile("asset/font/Space.ttf")) {
 		throw("ERROR::MAINMENUSTATE::COULD NOT LOAD FONT");
 	}
 }
 
-void MainMenuState::initButtons()
+void CMainMenuState::InitButtons()
 {
-	this->buttons["GAME_STATE"] = new Button(1500, 400, 150, 50, &this->font, "Jouer",
+	this->Buttons["GAME_STATE"] = new CButton(1500, 400, 150, 50, &this->Font, "Jouer",
 		sf::Color(70, 70, 70, 200), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200));
 
-	this->buttons["EXIT_STATE"] = new Button(1500, 600, 150, 50, &this->font, "Quitter",
+	this->Buttons["EXIT_STATE"] = new CButton(1500, 600, 150, 50, &this->Font, "Quitter",
 		sf::Color(70, 70, 70, 200), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200));
 }
 
 
-void MainMenuState::updateButtons()
+void CMainMenuState::UpdateButtons()
 {
 
 	// Update all the buttons in the  state and handles their functionality
-	for (auto  &iterator : this->buttons)
+	for (auto  &iterator : this->Buttons)
 	{
-		iterator.second->update(this->mousePosView);
+		iterator.second->Update(this->MousePosView);
 	}
 
 	//Play
-	if (this->buttons["GAME_STATE"]->isPressed())
+	if (this->Buttons["GAME_STATE"]->IsPressed())
 	{
-		this->states->push(new GameState(this->window, this->states));
+		this->States->push(new CGameState(this->Window, this->States));
 	}
 
 	//Quit the game
-	if (this->buttons["EXIT_STATE"]->isPressed())
+	if (this->Buttons["EXIT_STATE"]->IsPressed())
 	{
-		this->endState();
+		this->EndState();
 	}
 }
 
-void MainMenuState::renderButtons(sf::RenderTarget* target)
+void CMainMenuState::RenderButtons(sf::RenderTarget* target)
 {
-	for (auto& iterator : this->buttons)
+	for (auto& iterator : this->Buttons)
 	{
-		iterator.second->render(target);
+		iterator.second->Render(target);
 	}
 }
 
 
 
-void MainMenuState::updateInput(const float& dt)
+void CMainMenuState::UpdateInput(const float& dt)
 {
 
 
 }
 
-void MainMenuState::update(const float& dt)
+void CMainMenuState::Update(const float& dt)
 {
-	this->updateInput(dt);
-	this->updateMousePosition();
+	this->UpdateInput(dt);
+	this->UpdateMousePosition();
 
-	this->updateButtons();
+	this->UpdateButtons();
 
 
 }
 
 
 
-void MainMenuState::render(sf::RenderTarget* target)
+void CMainMenuState::Render(sf::RenderTarget* target)
 {
 	if (!target)
-		target = this->window;
+		target = this->Window;
 
-	target->draw(this->background);
+	target->draw(this->Background);
 
-	this->renderButtons(target);
+	this->RenderButtons(target);
 }

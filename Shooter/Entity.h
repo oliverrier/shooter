@@ -3,26 +3,26 @@
 
 #include "MovementComponent.h"
  
-class Entity
+class CEntity
 {
 protected:
-	sf::Sprite sprite;
+	sf::Sprite Sprite;
 
-	MovementComponent* movementComponent;
+	CMovementComponent* MovementComponent;
 public:
-	Entity();
-	virtual ~Entity();
+	CEntity();
+	virtual ~CEntity();
 
 	//Component functions
-	void setTexture(sf::Texture& texture);
-	void createMovementComponent(const float maxVelocity);
+	void SetTexture(sf::Texture& texture);
+	void CreateMovementComponent(const float MaxVelocity);
 
 	//Functions
-	virtual void setPosition(const float x, const float y);
-	virtual void move(const float dt, const float dirX, const float dirY);
+	virtual void SetPosition(const float x, const float y);
+	virtual void Move(const float dt, const float dirX, const float dirY);
 
-	virtual void update(const float& dt);
-	virtual void render(sf::RenderTarget* target);
+	virtual void Update(const float& dt);
+	virtual void Render(sf::RenderTarget* target);
 
 };
 

@@ -1,31 +1,31 @@
 #include "State.h"
 
 
-State::State(sf::RenderWindow* window, std::stack<State*>* states) {
-	this->window = window;
-	this->quit = false;
-	this->states = states;
+CState::CState(sf::RenderWindow* Window, std::stack<CState*>* States) {
+	this->Window = Window;
+	this->Quit = false;
+	this->States = States;
 }
 
-State::~State() {
+CState::~CState() {
 
 }
 
-const bool& State::getQuit() const
+const bool& CState::GetQuit() const
 {
-	return this->quit;
+	return this->Quit;
 }
 
-void State::endState()
+void CState::EndState()
 {
-	this->quit = true;
+	this->Quit = true;
 }
 
 
-void State::updateMousePosition()
+void CState::UpdateMousePosition()
 {
-	this->mousePosScreen = sf::Mouse::getPosition();
-	this->mousePosWindow = sf::Mouse::getPosition(*this->window);
-	this->mousePosView = this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window));
+	this->MousePosScreen = sf::Mouse::getPosition();
+	this->MousePosWindow = sf::Mouse::getPosition(*this->Window);
+	this->MousePosView = this->Window->mapPixelToCoords(sf::Mouse::getPosition(*this->Window));
 }
 

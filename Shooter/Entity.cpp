@@ -2,11 +2,11 @@
 
 
 
-Entity::Entity(): movementComponent(nullptr)
+CEntity::CEntity(): MovementComponent(nullptr)
 {
 }
 
-Entity::~Entity()
+CEntity::~CEntity()
 {
 }
 
@@ -14,37 +14,37 @@ Entity::~Entity()
 
 // components functions
 
-void Entity::setTexture(sf::Texture& texture)
+void CEntity::SetTexture(sf::Texture& texture)
 {
-	this->sprite.setTexture(texture);
+	this->Sprite.setTexture(texture);
 }
 
 
-void Entity::createMovementComponent(const float maxVelocity)
+void CEntity::CreateMovementComponent(const float MaxVelocity)
 {
-	this->movementComponent = new MovementComponent(this->sprite, maxVelocity);
+	this->MovementComponent = new CMovementComponent(this->Sprite, MaxVelocity);
 }
 
 // Functions
-void Entity::move(const float dt, const float dirX, const float dirY)
+void CEntity::Move(const float dt, const float dirX, const float dirY)
 {
-	if (this->movementComponent)
+	if (this->MovementComponent)
 	{
-		this->movementComponent->move(dirX, dirY, dt); // Sets velocity
+		this->MovementComponent->Move(dirX, dirY, dt); // Sets velocity
 	}
 }
 
-void Entity::setPosition(const float x, const float y)
+void CEntity::SetPosition(const float x, const float y)
 {
-		this->sprite.setPosition(x, y);
+		this->Sprite.setPosition(x, y);
 }
 
-void Entity::update(const float& dt)
+void CEntity::Update(const float& dt)
 {
 
 }
 
-void Entity::render(sf::RenderTarget* target)
+void CEntity::Render(sf::RenderTarget* target)
 {
-	    target->draw(this->sprite);
+	    target->draw(this->Sprite);
 }

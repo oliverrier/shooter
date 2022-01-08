@@ -6,35 +6,35 @@
 #include "Button.h"
  
  
-class MainMenuState :
-    public State
+class CMainMenuState :
+    public CState
 {
 
 private:
     //variables
-    sf::Texture textureBackground;
-    sf::RectangleShape background;
-    sf::Font font;
+    sf::Texture TextureBackground;
+    sf::RectangleShape Background;
+    sf::Font Font;
 
-  std::map<std::string, Button*> buttons;
+    std::map<std::string, CButton*> Buttons;
 
     //Functions
-  void initVariables();
-    void initBackground();
-    void initFonts();
-    void initButtons();
+    void InitVariables();
+    void InitBackground();
+    void InitFonts();
+    void InitButtons();
 
 
 public:
 
-    MainMenuState(sf::RenderWindow* window, std::stack<State*>* states);
-    virtual ~MainMenuState();
+    CMainMenuState(sf::RenderWindow* Window, std::stack<CState*>* states);
+    virtual ~CMainMenuState();
 
-    void updateInput(const float& dt);
-    void updateButtons();
-    void renderButtons(sf::RenderTarget* target = NULL);
-    void update(const float& dt);
-    void render(sf::RenderTarget* target = NULL);
+    void UpdateInput(const float& dt);
+    void UpdateButtons();
+    void RenderButtons(sf::RenderTarget* target = NULL);
+    void Update(const float& dt);
+    void Render(sf::RenderTarget* target = NULL);
 };
 
 #endif

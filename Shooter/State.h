@@ -2,33 +2,33 @@
 #define STATE_H
 
 
-#include "Player.h"
+#include "Spaceship.h"
 
-class State
+class CState
 {
 
 protected:
-	std::stack<State*>* states;
-	sf::RenderWindow* window;
-	std::map<std::string, sf::Texture> textures;
-	bool quit;
+	std::stack<CState*>* States;
+	sf::RenderWindow* Window;
+	std::map<std::string, sf::Texture> Textures;
+	bool Quit;
 
-	sf::Vector2i mousePosScreen;
-	sf::Vector2i mousePosWindow;
-	sf::Vector2f mousePosView;
+	sf::Vector2i MousePosScreen;
+	sf::Vector2i MousePosWindow;
+	sf::Vector2f MousePosView;
 
 public:
-	State(sf::RenderWindow* window, std::stack<State*>* states);
-	virtual ~State();
+	CState(sf::RenderWindow* Window, std::stack<CState*>* States);
+	virtual ~CState();
 
-	const bool& getQuit() const;
+	const bool& GetQuit() const;
 
-	void endState();
+	void EndState();
 
-	virtual void updateMousePosition();
-	virtual void updateInput(const float& dt) = 0;
-	virtual void update(const float& dt) = 0;
-	virtual void render(sf::RenderTarget* target = NULL) = 0;
+	virtual void UpdateMousePosition();
+	virtual void UpdateInput(const float& dt) = 0;
+	virtual void Update(const float& dt) = 0;
+	virtual void Render(sf::RenderTarget* target = NULL) = 0;
 
 };
 
