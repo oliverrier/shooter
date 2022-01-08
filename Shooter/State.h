@@ -2,7 +2,7 @@
 #define STATE_H
 
 
-#include "Entity.h"
+#include "Player.h"
 
 class State
 {
@@ -10,7 +10,7 @@ class State
 protected:
 	std::stack<State*>* states;
 	sf::RenderWindow* window;
-	std::vector<sf::Texture> textures;
+	std::map<std::string, sf::Texture> textures;
 	bool quit;
 
 	sf::Vector2i mousePosScreen;
@@ -23,10 +23,8 @@ public:
 
 	const bool& getQuit() const;
 
+	void endState();
 
-	virtual void checkForQuit();
-
-	virtual void endState() = 0;
 	virtual void updateMousePosition();
 	virtual void updateInput(const float& dt) = 0;
 	virtual void update(const float& dt) = 0;

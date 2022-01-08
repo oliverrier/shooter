@@ -11,13 +11,16 @@ State::~State() {
 
 }
 
-void State::checkForQuit()
+const bool& State::getQuit() const
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-	{
-		this->quit = true;
-	}
+	return this->quit;
 }
+
+void State::endState()
+{
+	this->quit = true;
+}
+
 
 void State::updateMousePosition()
 {
@@ -26,7 +29,3 @@ void State::updateMousePosition()
 	this->mousePosView = this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window));
 }
 
-const bool& State::getQuit() const
-{
-	return this->quit;
-}

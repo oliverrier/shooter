@@ -7,14 +7,16 @@ class GameState : public State
 {
 
 private:
-    Entity Player;
+    Player* player;
+
+    //functions
+    void initTextures();
+    void initPlayer();
 
 public:
     GameState(sf::RenderWindow* window, std::stack<State*>* states);
     virtual ~GameState();
 
-    // functions
-    void endState();
 
     virtual void updateInput(const float& dt);
 
