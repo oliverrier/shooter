@@ -2,7 +2,6 @@
 
 CMainMenuState::CMainMenuState(sf::RenderWindow* window, std::stack<CState*>* states) : CState(window, states)
 {
-	InitVariables();
 	InitBackground();
 	InitFonts();
 	InitButtons();
@@ -21,9 +20,6 @@ CMainMenuState::~CMainMenuState()
 }
 
 
-void CMainMenuState::InitVariables()
-{
-}
 
 void CMainMenuState::InitBackground()
 {

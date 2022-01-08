@@ -75,7 +75,7 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

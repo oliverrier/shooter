@@ -1,10 +1,7 @@
 #include "State.h"
 
 
-CState::CState(sf::RenderWindow* window, std::stack<CState*>* states) {
-	Window = window;
-	Quit = false;
-	States = states;
+CState::CState(sf::RenderWindow* window, std::stack<CState*>* states): Window(window), Quit(false),States(states) {
 }
 
 CState::~CState() {

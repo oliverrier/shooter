@@ -2,7 +2,7 @@
 
 
 
-CGameState::CGameState(sf::RenderWindow* window, std::stack<CState*>* states ) : CState(window, states)
+CGameState::CGameState(sf::RenderWindow* window, std::stack<CState*>* states ) : CState(window, states), Spaceship()
 {
 	InitTextures();
 	InitPlayer();

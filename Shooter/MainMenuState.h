@@ -19,7 +19,6 @@ private:
     std::map<std::string, CButton*> Buttons;
 
     //Functions
-    void InitVariables();
     void InitBackground();
     void InitFonts();
     void InitButtons();

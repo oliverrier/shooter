@@ -3,14 +3,13 @@
 
 // Constructors
 
-CButton::CButton(float x, float y, float width, float height, sf::Font* font, std::string text, sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor)
+CButton::CButton(float x, float y, float width, float height, sf::Font* font, std::string text, sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor):
+	ButtonState(BTN_IDLE), Font(font), IdleColor(idleColor), HoverColor(hoverColor), ActiveColor(activeColor)
 {
-	ButtonState = BTN_IDLE;
 
 	Shape.setPosition(sf::Vector2f(x, y));
 	Shape.setSize(sf::Vector2f(width, height));
 
-	Font = font;
 
 	Text.setFont(*font);
 	Text.setString(text);
@@ -21,9 +20,6 @@ CButton::CButton(float x, float y, float width, float height, sf::Font* font, st
 		Shape.getPosition().x + Shape.getGlobalBounds().width / 2 - Text.getGlobalBounds().width / 2,
 		Shape.getPosition().y + Shape.getGlobalBounds().height / 2  - Text.getGlobalBounds().height / 1.5
 	);
-	IdleColor = idleColor;
-	HoverColor = hoverColor;
-	ActiveColor = activeColor;
 
 	Shape.setFillColor(IdleColor);
 }
