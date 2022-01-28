@@ -40,16 +40,6 @@ void CGameState::InitPlayer()
 void CGameState::UpdateInput(const float& dt)
 {
 
-	//Update player input
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-		Spaceship->Move(dt, -5.f, 0.f);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		Spaceship->Move(dt, 5.f, 0.f);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-		Spaceship->Move(dt, 0.f, -5.f);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		Spaceship->Move(dt, 0.f, 5.f);
-
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		EndState();
 }
@@ -67,5 +57,5 @@ void CGameState::Render(sf::RenderTarget* target)
 	if (!target)
 		target = Window;
 
-	Spaceship->Render(target );
+	Spaceship->Render(target);
 }
