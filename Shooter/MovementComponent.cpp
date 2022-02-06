@@ -1,6 +1,6 @@
 #include "MovementComponent.h"
 
-CMovementComponent::CMovementComponent(sf::Sprite& Sprite, float MaxVelocity): Sprite(Sprite), MaxVelocity(MaxVelocity)
+CMovementComponent::CMovementComponent(float MaxVelocity): MaxVelocity(MaxVelocity)
 {
 }
 
@@ -10,12 +10,14 @@ CMovementComponent::~CMovementComponent()
 
 
 //functions
-void CMovementComponent::Move(const float dirX, const float dirY, const float& dt)
+void CMovementComponent::Move(const float& dt, sf::Sprite& sprite, const float directionX, const float directionY)
 {
-	Velocity.x = MaxVelocity * dirX;
-	Velocity.y = MaxVelocity * dirY;
 
-	Sprite.move(Velocity * dt); // Uses velocity
+	//Penser à faire un normalize
+	Velocity.x = MaxVelocity * directionX;
+	Velocity.y = MaxVelocity * directionY;
+
+	sprite.move(Velocity * dt); // Uses velocity
 
 }
 

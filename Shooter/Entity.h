@@ -1,25 +1,22 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "MovementComponent.h"
+#include "PlayerController.h"
  
+
 class CEntity
 {
 protected:
 	sf::Sprite Sprite;
 
-	CMovementComponent* MovementComponent;
+	CController& Controller;
 public:
-	CEntity();
+	CEntity(CController& controller, sf::Sprite sprite, float positionX, float positionY);
 	virtual ~CEntity();
 
-	//Component functions
-	void SetTexture(sf::Texture& texture);
-	void CreateMovementComponent(const float maxVelocity);
 
 	//Functions
 	virtual void SetPosition(const float x, const float y);
-	virtual void Move(const float dt, const float dirX, const float dirY);
 
 	virtual void Update(const float& dt);
 	virtual void Render(sf::RenderTarget* target);

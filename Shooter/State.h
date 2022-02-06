@@ -2,7 +2,7 @@
 #define STATE_H
 
 
-#include "Spaceship.h"
+#include "Entity.h"
 
 class CState
 {

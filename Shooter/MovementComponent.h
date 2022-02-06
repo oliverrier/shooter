@@ -14,8 +14,6 @@
 class CMovementComponent
 {
 private:
-	sf::Sprite& Sprite;
-
 	float MaxVelocity;
 
 	sf::Vector2f Velocity;
@@ -25,14 +23,14 @@ private:
 
 
 public:
-	CMovementComponent(sf::Sprite& sprite, float maxVelocity);
+	CMovementComponent(float maxVelocity);
 	virtual ~CMovementComponent();
 
 	//accessors
 	const sf::Vector2f& GetVelocity() const;
 
 	//functions
-	void Move(const float dirX, const float dirY, const float& dt);
+	void Move(const float& dt, sf::Sprite& sprite,const float directionX, const float directionY );
 	void Update(const float& dt);
 };
 
