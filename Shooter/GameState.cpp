@@ -32,7 +32,8 @@ void CGameState::InitMusic() {
 
 void CGameState::InitPlayer()
 {
-	SpaceshipPlayer = new CEntity(*new CPlayerController(50), *new sf::Sprite(Textures["PLAYER_IDLE"]), 0, 0);
+	CSpriteComponent test = new CSpriteComponent(*new sf::Sprite(Textures["PLAYER_IDLE"]), 0.5, 0.5)
+	SpaceshipPlayer = new CEntity(*new CPlayerController(50), *new CSpriteComponent(*new sf::Sprite(Textures["PLAYER_IDLE"]), 0.5, 0.5));
 }
 
 

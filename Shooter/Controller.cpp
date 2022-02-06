@@ -16,6 +16,6 @@ void CController::Move(const float dt, sf::Sprite& sprite, const float dirX, con
 	MovementComponent.Move(dt, sprite, dirX, dirY); // Sets velocity
 }
 
-void CController::UpdateLogic(const float& dt, sf::Sprite& sprite)
+void CController::UpdateLogic(const float& dt, std::map<std::string, CSpriteComponent>& spritesComponent)
 {
 }

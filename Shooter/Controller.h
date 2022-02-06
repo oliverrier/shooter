@@ -4,6 +4,7 @@
 #define CONTROLLER_H
 
 #include "MovementComponent.h"
+#include "SpriteComponent.h"
 
 class CController
 {
@@ -17,7 +18,7 @@ public:
 
 	//functions
 	virtual void Move(const float dt, sf::Sprite& sprite, const float dirX, const float dirY);
-	virtual void UpdateLogic(const float& dt, sf::Sprite& sprite) = 0;
+	virtual void UpdateLogic(const float& dt, std::map<std::string, CSpriteComponent>& spritesComponent) = 0;
 
 
 };

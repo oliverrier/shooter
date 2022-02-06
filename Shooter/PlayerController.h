@@ -13,7 +13,7 @@ public:
 
 
 	//functions
-	void UpdateLogic(const float& dt, sf::Sprite& sprite);
+	void UpdateLogic(const float& dt, std::map<std::string, CSpriteComponent>& spritesComponent);
 };
 
 #endif

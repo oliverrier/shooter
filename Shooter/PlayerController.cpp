@@ -4,7 +4,7 @@ CPlayerController::CPlayerController(float maxVelocity):CController(maxVelocity)
 {
 }
 
-void CPlayerController::UpdateLogic(const float& dt, sf::Sprite& sprite)
+void CPlayerController::UpdateLogic(const float& dt, std::map<std::string, CSpriteComponent>& spritesComponent)
 {
 	float directionX = 0;
 	float directionY = 0;
@@ -19,6 +19,5 @@ void CPlayerController::UpdateLogic(const float& dt, sf::Sprite& sprite)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		directionY = 5.f;
 
-	Move(dt, sprite, directionX, directionY);
-
+	Move(dt, spritesComponent["root"].Sprite, directionX, directionY);
 }
