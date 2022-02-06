@@ -18,7 +18,7 @@ public:
 
 	//functions
 	virtual void Move(const float dt, sf::Sprite& sprite, const float dirX, const float dirY);
-	virtual void UpdateLogic(const float& dt, std::map<std::string, CSpriteComponent>& spritesComponent) = 0;
+	virtual void UpdateLogic(const float& dt, std::map<const char*, CSpriteComponent>& spritesComponent) = 0;
 
 
 };

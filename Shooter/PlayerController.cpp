@@ -4,7 +4,7 @@ CPlayerController::CPlayerController(float maxVelocity):CController(maxVelocity)
 {
 }
 
-void CPlayerController::UpdateLogic(const float& dt, std::map<std::string, CSpriteComponent>& spritesComponent)
+void CPlayerController::UpdateLogic(const float& dt, std::map<const char*, CSpriteComponent>& spritesComponent)
 {
 	float directionX = 0;
 	float directionY = 0;

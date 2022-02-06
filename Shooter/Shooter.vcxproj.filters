@@ -60,9 +60,6 @@
     <ClCompile Include="PlayerController.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
