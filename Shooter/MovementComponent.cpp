@@ -31,4 +31,3 @@ const sf::Vector2f& CMovementComponent::GetVelocity() const
 {
 	return Velocity;
 }
-

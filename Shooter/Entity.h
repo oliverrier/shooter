@@ -2,7 +2,7 @@
 #define ENTITY_H
 
 #include "PlayerController.h"
- 
+
 
 class CEntity
 {
@@ -17,12 +17,15 @@ protected:
 
 public:
 	CEntity(const char* Name, CController& controller, std::map<const char*, CSpriteComponent> spritesComponent);
-	CEntity(const char* Name, CController& controller,CSpriteComponent spriteComponent);
+	CEntity(const char* Name, CController& controller, CSpriteComponent spriteComponent);
 	CEntity(const char* Name, CController& controller, sf::Sprite sprite);
 	virtual ~CEntity();
 
 	// intits
 	void InitSprites();
+
+	//getter and setters
+	std::map<const char*, CSpriteComponent>& GetSpritesComponent();
 
 	//Functions
 	virtual void SetChildSprite(const char* keyName, CSpriteComponent& spriteComponent, const char* parentKey = "root");
@@ -31,9 +34,9 @@ public:
 
 	virtual void SetParentEntity(CEntity* parentEntity);
 	virtual void SetChildEntity(CEntity* childEntity);
-	virtual void DetacheFromParentEntity();
-	virtual void DetacheChildEntity(const char* childKey);
-	virtual void DetacheChildEntities();
+	virtual void DetachFromParentEntity();
+	virtual void DetachChildEntity(const char* childKey);
+	virtual void DetachChildEntities();
 
 	virtual void Update(const float& dt);
 	virtual void RecursiveSpriteRender(sf::RenderTarget* target, CSpriteComponent& spriteComponent);

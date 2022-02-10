@@ -89,9 +89,6 @@
     <ClInclude Include="PlayerController.h">
       <Filter>Controllers</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="SpriteComponent.h">
       <Filter>Components</Filter>
     </ClInclude>

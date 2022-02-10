@@ -19,5 +19,5 @@ void CPlayerController::UpdateLogic(const float& dt, std::map<const char*, CSpri
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		directionY = 5.f;
 
-	Move(dt, spritesComponent["root"].Sprite, directionX, directionY);
+	MoveAllSprites(dt, spritesComponent, directionX, directionY);
 }

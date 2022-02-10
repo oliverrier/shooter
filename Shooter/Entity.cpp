@@ -49,6 +49,11 @@ void CEntity::SetChildSprite(const char* keyName, CSpriteComponent& spriteCompon
 	SpritesComponent[keyName] = spriteComponent;
 }
 
+std::map<const char*, CSpriteComponent>& CEntity::GetSpritesComponent()
+{
+	return SpritesComponent;
+}
+
 void CEntity::SetChildSprite(const char* keyName, sf::Sprite& sprite, const char* parentKey)
 {
 	CSpriteComponent spriteComponent = *new CSpriteComponent(sprite, parentKey);
@@ -84,31 +89,35 @@ void CEntity::SetChildEntity(CEntity* childEntity)
 	childEntity->SetParentEntity(this);
 }
 
-void CEntity::DetacheFromParentEntity()
+void CEntity::DetachFromParentEntity()
 {
 	ParentEntity->ChildEntities.erase(Name);
 	ParentEntity = nullptr;
 }
 
-void CEntity::DetacheChildEntity(const char* childKey)
+void CEntity::DetachChildEntity(const char* childKey)
 {
-	ChildEntities[childKey]->DetacheFromParentEntity();
+	ChildEntities[childKey]->DetachFromParentEntity();
 }
 
-void CEntity::DetacheChildEntities()
+void CEntity::DetachChildEntities()
 {
 	for (auto& child : ChildEntities)
 	{
-		child.second->DetacheFromParentEntity();
+		child.second->DetachFromParentEntity();
 	}
 }
-
-
 
 
 void CEntity::Update(const float& dt)
 {
 	Controller.UpdateLogic(dt, SpritesComponent);
+
+
+	for (auto& child : ChildEntities)
+	{
+		Controller.UpdateLogic(dt, child.second->GetSpritesComponent());
+	}
 }
 
 void CEntity::RecursiveSpriteRender(sf::RenderTarget* target, CSpriteComponent& spriteComponent)
@@ -118,7 +127,6 @@ void CEntity::RecursiveSpriteRender(sf::RenderTarget* target, CSpriteComponent& 
 	for (const char* key : spriteComponent.ChildKeys) {
 		RecursiveSpriteRender(target, SpritesComponent[key]);
 	}
-
 
 }
 
