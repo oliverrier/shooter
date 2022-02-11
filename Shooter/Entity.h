@@ -1,24 +1,45 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "PlayerController.h"
- 
+#include "Controller.h"
 
 class CEntity
 {
 protected:
-	sf::Sprite Sprite;
-
+	const char* Name;
 	CController& Controller;
+	std::map<const char*, CSpriteComponent> SpritesComponent;
+	CEntity* ParentEntity;
+	std::map<const char*, CEntity*> ChildEntities;
+
+	void RemoveKeyChildFromParent(const char* childKey, const char* parentKey);
+
 public:
-	CEntity(CController& controller, sf::Sprite sprite, float positionX, float positionY);
+	CEntity(const char* Name, CController& controller, std::map<const char*, CSpriteComponent> spritesComponent);
+	CEntity(const char* Name, CController& controller, CSpriteComponent spriteComponent);
+	CEntity(const char* Name, CController& controller, sf::Sprite sprite);
 	virtual ~CEntity();
 
+	// intits
+	void InitSprites();
+
+	//getter and setters
+	std::map<const char*, CSpriteComponent>& GetSpritesComponent();
+	std::map<const char*, CEntity*>& GetChildEntities();
 
 	//Functions
-	virtual void SetPosition(const float x, const float y);
+	virtual void SetChildSprite(const char* keyName, CSpriteComponent& spriteComponent, const char* parentKey = "root");
+	virtual void SetChildSprite(const char* keyName, sf::Sprite& sprite, const char* parentKey = "root");
+	virtual void RemoveSprite(const char* keyName);
+
+	virtual void SetParentEntity(CEntity* parentEntity);
+	virtual void SetChildEntity(CEntity* childEntity);
+	virtual void DetachFromParentEntity();
+	virtual void DetachChildEntity(const char* childKey);
+	virtual void DetachChildEntities();
 
 	virtual void Update(const float& dt);
+	virtual void RecursiveSpriteRender(sf::RenderTarget* target, CSpriteComponent& spriteComponent);
 	virtual void Render(sf::RenderTarget* target);
 
 };

@@ -18,7 +18,7 @@ using namespace std;
 class CButton
 {
 	private:
-		short unsigned ButtonState;
+		int ButtonState;
 
 		sf::RectangleShape Shape;        
 		sf::Font* Font;

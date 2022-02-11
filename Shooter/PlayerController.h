@@ -13,7 +13,7 @@ public:
 
 
 	//functions
-	void UpdateLogic(const float& dt, sf::Sprite& sprite);
+	void UpdateLogic(const float& dt, CEntity& entity);
 };
 
 #endif

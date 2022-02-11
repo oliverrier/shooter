@@ -24,7 +24,7 @@ void CGame::InitWindow() {
 	DesktopMode = sf::VideoMode::getDesktopMode();
 
 	// create the window 
-	Window = new sf::RenderWindow(sf::VideoMode(1920, 1080, DesktopMode.bitsPerPixel), "DOOM 2D");
+	Window = new sf::RenderWindow(sf::VideoMode(1920, 1080, DesktopMode.bitsPerPixel), "R-Type Final 2");
 	Window->setVerticalSyncEnabled(true);
 }
 
