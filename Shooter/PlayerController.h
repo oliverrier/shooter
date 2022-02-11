@@ -13,7 +13,7 @@ public:
 
 
 	//functions
-	void UpdateLogic(const float& dt, CEntity& spritesComponent);
+	void UpdateLogic(const float& dt, CEntity& entity);
 };
 
 #endif
