@@ -1,8 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "PlayerController.h"
-
+#include "Controller.h"
 
 class CEntity
 {
@@ -26,6 +25,7 @@ public:
 
 	//getter and setters
 	std::map<const char*, CSpriteComponent>& GetSpritesComponent();
+	std::map<const char*, CEntity*>& GetChildEntities();
 
 	//Functions
 	virtual void SetChildSprite(const char* keyName, CSpriteComponent& spriteComponent, const char* parentKey = "root");

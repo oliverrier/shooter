@@ -1,7 +1,6 @@
 #include "Entity.h"
 
 
-
 CEntity::CEntity(const char* name, CController& controller, std::map<const char*, CSpriteComponent> spritesComponent): Name(name), Controller(controller), SpritesComponent(spritesComponent), ParentEntity(nullptr)
 {
 	InitSprites();
@@ -52,6 +51,11 @@ void CEntity::SetChildSprite(const char* keyName, CSpriteComponent& spriteCompon
 std::map<const char*, CSpriteComponent>& CEntity::GetSpritesComponent()
 {
 	return SpritesComponent;
+}
+
+std::map<const char*, CEntity*>& CEntity::GetChildEntities()
+{
+	return ChildEntities;
 }
 
 void CEntity::SetChildSprite(const char* keyName, sf::Sprite& sprite, const char* parentKey)
@@ -111,13 +115,8 @@ void CEntity::DetachChildEntities()
 
 void CEntity::Update(const float& dt)
 {
-	Controller.UpdateLogic(dt, SpritesComponent);
+	Controller.UpdateLogic(dt, *this);
 
-
-	for (auto& child : ChildEntities)
-	{
-		Controller.UpdateLogic(dt, child.second->GetSpritesComponent());
-	}
 }
 
 void CEntity::RecursiveSpriteRender(sf::RenderTarget* target, CSpriteComponent& spriteComponent)

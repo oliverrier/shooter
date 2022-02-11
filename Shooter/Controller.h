@@ -6,6 +6,8 @@
 #include "MovementComponent.h"
 #include "SpriteComponent.h"
 
+class CEntity;
+
 class CController
 {
 private:
@@ -19,7 +21,7 @@ public:
 	//functions
 	virtual void Move(const float dt, sf::Sprite& sprite, const float dirX, const float dirY);
 	virtual void MoveAllSprites(const float dt, std::map<const char*, CSpriteComponent>& spritesComponent, const float dirX, const float dirY);
-	virtual void UpdateLogic(const float& dt, std::map<const char*, CSpriteComponent>& spritesComponent) = 0;
+	virtual void UpdateLogic(const float& dt, CEntity& spritesComponent) = 0;
 
 
 };

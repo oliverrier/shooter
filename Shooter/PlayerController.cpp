@@ -1,10 +1,11 @@
 #include "PlayerController.h"
+#include "Entity.h"
 
 CPlayerController::CPlayerController(float maxVelocity):CController(maxVelocity)
 {
 }
 
-void CPlayerController::UpdateLogic(const float& dt, std::map<const char*, CSpriteComponent>& spritesComponent)
+void CPlayerController::UpdateLogic(const float& dt, CEntity& entity)
 {
 	float directionX = 0;
 	float directionY = 0;
@@ -19,5 +20,10 @@ void CPlayerController::UpdateLogic(const float& dt, std::map<const char*, CSpri
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		directionY = 5.f;
 
-	MoveAllSprites(dt, spritesComponent, directionX, directionY);
+	MoveAllSprites(dt, entity.GetSpritesComponent(), directionX, directionY);
+
+	for (auto& child : entity.GetChildEntities())
+	{
+		MoveAllSprites(dt, child.second->GetSpritesComponent(), directionX, directionY);
+	}
 }

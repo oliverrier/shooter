@@ -3,14 +3,12 @@
 
 
 #include "Entity.h"
-
 class CState
 {
 
 protected:
 	std::stack<CState*>* States;
 	sf::RenderWindow* Window;
-	std::map<std::string, sf::Texture> Textures;
 	bool Quit;
 
 	sf::Vector2i MousePosScreen;

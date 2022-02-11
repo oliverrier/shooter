@@ -12,7 +12,6 @@ private:
     CEntity* SpaceshipPlayer;
 
     //functions
-    void InitTextures();
     void InitMusic();
     void InitPlayer();
 

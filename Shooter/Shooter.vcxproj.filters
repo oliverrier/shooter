@@ -60,6 +60,9 @@
     <ClCompile Include="PlayerController.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
+    <ClCompile Include="TextureDictionary.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="SpriteComponent.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureDictionary.h">
+      <Filter>utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

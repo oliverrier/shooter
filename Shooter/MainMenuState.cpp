@@ -25,11 +25,7 @@ void CMainMenuState::InitBackground()
 {
 	Background.setSize(sf::Vector2f((float) Window->getSize().x, (float)Window->getSize().y));
 
-	if (!TextureBackground.loadFromFile("asset/sprite/menu/mainMenu/wallpaper.png"))
-		throw "ERROR:MAIN_MENU_STATE::FAILED_TO_LOAD_BACKGROUND_TEXTURE";
-
-	Background.setTexture(&TextureBackground);
-	
+	Background.setTexture(CTextureDictionary::GetTexture("WALLPAPER"));
 }
 
 void CMainMenuState::InitMusic() {
