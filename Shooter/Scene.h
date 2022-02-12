@@ -3,12 +3,12 @@
 
 
 #include "Entity.h"
-class CState
+class CScene
 {
 
 protected:
-	std::stack<CState*>* States;
-	sf::RenderWindow* Window;
+	std::stack<CScene*>& States;
+	sf::RenderWindow& Window;
 	bool Quit;
 
 	sf::Vector2i MousePosScreen;
@@ -16,8 +16,8 @@ protected:
 	sf::Vector2f MousePosView;
 
 public:
-	CState(sf::RenderWindow* window, std::stack<CState*>* states);
-	virtual ~CState();
+	CScene(sf::RenderWindow& window, std::stack<CScene*>& states);
+	virtual ~CScene();
 
 	const bool& GetQuit() const;
 
@@ -26,7 +26,7 @@ public:
 	virtual void UpdateMousePosition();
 	virtual void UpdateInput(const float& dt) = 0;
 	virtual void Update(const float& dt) = 0;
-	virtual void Render(sf::RenderTarget* target = nullptr) = 0;
+	virtual void Render(sf::RenderTarget& target) = 0;
 
 };
 

@@ -3,7 +3,7 @@
 
 // Constructors
 
-CButton::CButton(float x, float y, float width, float height, sf::Font* font, std::string text, sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor):
+CButton::CButton(float x, float y, float width, float height, sf::Font& font, std::string text, sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor):
 	ButtonState(BTN_IDLE), Font(font), IdleColor(idleColor), HoverColor(hoverColor), ActiveColor(activeColor)
 {
 
@@ -11,14 +11,14 @@ CButton::CButton(float x, float y, float width, float height, sf::Font* font, st
 	Shape.setSize(sf::Vector2f(width, height));
 
 
-	Text.setFont(*font);
+	Text.setFont(font);
 	Text.setString(text);
 	Text.setFillColor(sf::Color::White);
 	Text.setCharacterSize(20);
 	Text.setPosition(
 		//permet de centrer le texte dans le bouton
-		Shape.getPosition().x + Shape.getGlobalBounds().width / 2 - Text.getGlobalBounds().width / 2,
-		Shape.getPosition().y + Shape.getGlobalBounds().height / 2  - Text.getGlobalBounds().height / 1.5
+		Shape.getPosition().x + Shape.getGlobalBounds().width / 2.f - Text.getGlobalBounds().width / 2.f,
+		Shape.getPosition().y + Shape.getGlobalBounds().height / 2.f - Text.getGlobalBounds().height / 1.5f
 	);
 
 	Shape.setFillColor(IdleColor);
@@ -74,9 +74,9 @@ void CButton::Update(sf::Vector2f mousePos)
 	}
 }
 
-void CButton::Render(sf::RenderTarget* target)
+void CButton::Render(sf::RenderTarget& target)
 {
-	target->draw(Shape);
-	target->draw(Text);
+	target.draw(Shape);
+	target.draw(Text);
 }
 

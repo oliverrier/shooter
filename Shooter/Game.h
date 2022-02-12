@@ -2,7 +2,7 @@
 #define GAME_H
 
 
-#include "MainMenuState.h"
+#include "MainMenu.h"
 
 
 
@@ -12,14 +12,14 @@ class CGame
 private:
 	// variables 
 	sf::VideoMode DesktopMode;
-	sf::RenderWindow* Window;
+	sf::RenderWindow& Window;
 
 	sf::Event SfEvent;
 
 	sf::Clock DeltaTimeClock;
 	float DeltaTime;
 
-	std::stack<CState*> States;
+	std::stack<CScene*> States;
 		
 	// functions
 	void InitWindow();

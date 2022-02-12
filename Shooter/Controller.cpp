@@ -17,7 +17,7 @@ void CController::Move(const float dt, sf::Sprite& sprite, const float dirX, con
 }
 
 
-void CController::MoveAllSprites(const float dt, std::map<const char*, CSpriteComponent>& spritesComponent, const float dirX, const float dirY)
+void CController::MoveAllSprites(const float dt, std::map<const char*, SSpriteComponent>& spritesComponent, const float dirX, const float dirY)
 {
 	for (auto& sprite : spritesComponent)
 	{

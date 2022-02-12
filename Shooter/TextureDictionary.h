@@ -14,7 +14,7 @@ private:
 
 
 public:
-	static const sf::Texture* GetTexture(const char* textureName);
+	static const sf::Texture& GetTexture(const char* textureName);
 };
 
 #endif

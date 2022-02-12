@@ -7,8 +7,7 @@ CPlayerController::CPlayerController(float maxVelocity):CController(maxVelocity)
 
 void CPlayerController::UpdateLogic(const float& dt, CEntity& entity)
 {
-	float directionX = 0.f;
-	float directionY = 0.f;
+	float directionX = 0.f, directionY = 0.f;
 
 	//Update player input
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))

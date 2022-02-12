@@ -2,18 +2,17 @@
 #define MAINMENUSTATE_H
 
 
-#include "GameState.h"
+#include "FirstLevel.h"
 #include "Button.h"
  
  
-class CMainMenuState :
-    public CState
+class CMainMenu :
+    public CScene
 {
 
 private:
     //variables
     sf::Music Music;
-    sf::Texture TextureBackground;
     sf::RectangleShape Background;
     sf::Font Font;
 
@@ -28,14 +27,14 @@ private:
 
 public:
 
-    CMainMenuState(sf::RenderWindow* window, std::stack<CState*>* states);
-    virtual ~CMainMenuState();
+    CMainMenu(sf::RenderWindow& window, std::stack<CScene*>& states);
+    virtual ~CMainMenu();
 
     void UpdateInput(const float& dt);
     void UpdateButtons();
-    void RenderButtons(sf::RenderTarget* target = NULL);
+    void RenderButtons(sf::RenderTarget& target);
     void Update(const float& dt);
-    void Render(sf::RenderTarget* target = NULL);
+    void Render(sf::RenderTarget& target);
 };
 
 #endif

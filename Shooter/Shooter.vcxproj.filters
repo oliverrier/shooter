@@ -36,13 +36,13 @@
     <ClCompile Include="Game.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
+    <ClCompile Include="Scene.cpp">
       <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="GameState.cpp">
+    <ClCompile Include="FirstLevel.cpp">
       <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenuState.cpp">
+    <ClCompile Include="MainMenu.cpp">
       <Filter>States</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
@@ -68,13 +68,13 @@
     <ClInclude Include="Entity.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="GameState.h">
+    <ClInclude Include="FirstLevel.h">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="MainMenuState.h">
+    <ClInclude Include="MainMenu.h">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="State.h">
+    <ClInclude Include="Scene.h">
       <Filter>States</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
