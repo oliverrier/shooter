@@ -2,15 +2,7 @@
 #define TEXTUREDICTIONARY_H
 
 
-#include<iostream>
-#include<stack>
-#include<vector>
-#include<map>
-
-//SFML
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-#include "TexturesManager.h"
+#include "Common.h"
 
 class CTextureDictionary
 {
@@ -22,7 +14,7 @@ private:
 
 
 public:
-	static const sf::Texture* GetTexture(const char* textureName);
+	static const sf::Texture& GetTexture(const char* textureName);
 };
 
 #endif

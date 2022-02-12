@@ -8,15 +8,15 @@ class CEntity
 protected:
 	const char* Name;
 	CController& Controller;
-	std::map<const char*, CSpriteComponent> SpritesComponent;
+	std::map<const char*, SSpriteComponent> SpritesComponent;
 	CEntity* ParentEntity;
 	std::map<const char*, CEntity*> ChildEntities;
 
 	void RemoveKeyChildFromParent(const char* childKey, const char* parentKey);
 
 public:
-	CEntity(const char* Name, CController& controller, std::map<const char*, CSpriteComponent> spritesComponent);
-	CEntity(const char* Name, CController& controller, CSpriteComponent spriteComponent);
+	CEntity(const char* Name, CController& controller, std::map<const char*, SSpriteComponent> spritesComponent);
+	CEntity(const char* Name, CController& controller, SSpriteComponent spriteComponent);
 	CEntity(const char* Name, CController& controller, sf::Sprite sprite);
 	virtual ~CEntity();
 
@@ -24,11 +24,11 @@ public:
 	void InitSprites();
 
 	//getter and setters
-	std::map<const char*, CSpriteComponent>& GetSpritesComponent();
+	std::map<const char*, SSpriteComponent>& GetSpritesComponent();
 	std::map<const char*, CEntity*>& GetChildEntities();
 
 	//Functions
-	virtual void SetChildSprite(const char* keyName, CSpriteComponent& spriteComponent, const char* parentKey = "root");
+	virtual void SetChildSprite(const char* keyName, SSpriteComponent& spriteComponent, const char* parentKey = "root");
 	virtual void SetChildSprite(const char* keyName, sf::Sprite& sprite, const char* parentKey = "root");
 	virtual void RemoveSprite(const char* keyName);
 
@@ -39,8 +39,8 @@ public:
 	virtual void DetachChildEntities();
 
 	virtual void Update(const float& dt);
-	virtual void RecursiveSpriteRender(sf::RenderTarget* target, CSpriteComponent& spriteComponent);
-	virtual void Render(sf::RenderTarget* target);
+	virtual void RecursiveSpriteRender(sf::RenderTarget& target, SSpriteComponent& spriteComponent);
+	virtual void Render(sf::RenderTarget& target);
 
 };
 

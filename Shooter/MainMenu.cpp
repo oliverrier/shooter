@@ -1,75 +1,114 @@
 #include "MainMenu.h"
-#include "Button.h"
-#include <iostream>
 
-//SFML
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
+CMainMenu::CMainMenu(sf::RenderWindow& window, std::stack<CScene*>& states) : CScene(window, states)
+{
+	InitBackground();
+	InitMusic();
+	InitFonts();
+	InitButtons();
+
+}
+
+CMainMenu::~CMainMenu()
+{
+	auto iterator = Buttons.begin();
+
+	for (iterator = Buttons.begin(); iterator != Buttons.end(); ++iterator)
+	{
+		delete iterator->second;
+	}
+}
 
 
-int createMainMenu() {
-    //// Retrieves information from the screen
-    //sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 
-    //sf::RenderWindow window(sf::VideoMode(1920, 1080, desktop.bitsPerPixel), "SFML window");
+void CMainMenu::InitBackground()
+{
+	Background.setSize(sf::Vector2f((float) Window.getSize().x, (float)Window.getSize().y));
 
-    //// Load a sprite to display
-    //sf::Texture textureBackground;
-    //if (!textureBackground.loadFromFile("asset/sprite/menu/mainMenu/wallpaper.png"))
-    //    return EXIT_FAILURE;
-    //sf::Sprite spriteBackground(textureBackground);
+	Background.setTexture(&CTextureDictionary::GetTexture("WALLPAPER"));
+}
+
+void CMainMenu::InitMusic() {
+	// Load a music to play
+	if (!Music.openFromFile("asset/musics/R-Type_Final_2_Main_Menu.wav"))
+		throw "ERROR:MAIN_MENU_STATE::FAILED_TO_LOAD_MUSIC";
+	Music.setLoop(true);
+}
+
+
+void CMainMenu::InitFonts()
+{
+	if (!Font.loadFromFile("asset/font/Space.ttf")) {
+		throw("ERROR::MAINMENUSTATE::COULD NOT LOAD FONT");
+	}
+}
+
+void CMainMenu::InitButtons()
+{
+	Buttons["GAME_STATE"] = new CButton(1500, 400, 150, 50, Font, "Jouer",
+		sf::Color(70, 70, 70, 200), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200));
+
+	Buttons["EXIT_STATE"] = new CButton(1500, 600, 150, 50, Font, "Quitter",
+		sf::Color(70, 70, 70, 200), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200));
+}
+
+
+void CMainMenu::UpdateButtons()
+{
+
+	// Update all the buttons in the  state and handles their functionality
+	for (auto  &iterator : Buttons)
+	{
+		iterator.second->Update(MousePosView);
+	}
+
+	//Play
+	if (Buttons["GAME_STATE"]->IsPressed())
+	{
+		Music.stop();
+		States.push(new CFirstLevel(Window, States));
+	}
+
+	//Quit the game
+	if (Buttons["EXIT_STATE"]->IsPressed())
+	{
+		EndState();
+	}
+}
+
+void CMainMenu::RenderButtons(sf::RenderTarget& target)
+{
+	for (auto& iterator : Buttons)
+	{
+		iterator.second->Render(target);
+	}
+}
 
 
 
-    //// Create a graphical text to display
-    //sf::Font font;
-    //if (!font.loadFromFile("asset/font/Doom2016Text.ttf"))
-    //    return EXIT_FAILURE;
+void CMainMenu::UpdateInput(const float& dt)
+{
 
-    //sf::Text textPlay("JOUER", font, 50);
-    //sf::Text textLeave("QUITTER", font, 50);
+}
 
-    ////create buttons
+void CMainMenu::Update(const float& dt)
+{
+	if (Music.getStatus() == sf::SoundSource::Status::Stopped)
+	{
+		Music.play();
+	}
 
-    //Button buttonPlay(window, textPlay);
-    //Button buttonLeave(window, textLeave);
+	UpdateInput(dt);
+	UpdateMousePosition();
 
-    ////creation vector for buttons position
-    //sf::Vector2f positionButtonPlay(1440.f, 440.f);
-    //sf::Vector2f positionButtonLeave(1440.f, 540.f);
+	UpdateButtons();
+}
 
-    //buttonPlay.setPosition(positionButtonPlay);
-    //buttonLeave.setPosition(positionButtonLeave);
 
-    //// Load a music to play
-    //sf::Music music;
-    //if (!music.openFromFile("asset/music/Doom_Eternal_Main_Theme_Official_Version.wav"))
-    //    return EXIT_FAILURE;
-    //// Play the music
-    //music.play();
-    //music.setLoop(true);
 
-    //// Start the game loop
-    //while (window.isOpen())
-    //{
-    //    // Process events
-    //    sf::Event event;
-    //    while (window.pollEvent(event))
-    //    {
-    //        // Close window: exit
-    //        if (event.type == sf::Event::Closed)
-    //            window.close();
-    //    }
-    //    // Clear screen
-    //    window.clear();
-    //    // Draw the sprite
-    //    window.draw(spriteBackground);
-    //    // Draw the buttons
-    //    buttonPlay.(window);
-    //    buttonLeave.drawInTheWindow(window);
+void CMainMenu::Render(sf::RenderTarget& target)
+{
 
-    //    // Update the window
-    //    window.display();
-    //}
-    return EXIT_SUCCESS;
+	target.draw(Background);
+	RenderButtons(target);
 }

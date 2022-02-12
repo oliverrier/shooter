@@ -21,9 +21,8 @@ class CButton
 		int ButtonState;
 
 		sf::RectangleShape Shape;        
-		sf::Font* Font;
+		sf::Font& Font;
 		sf::Text Text;
-
 
 
 		sf::Color IdleColor;
@@ -31,10 +30,9 @@ class CButton
 		sf::Color ActiveColor;
 
 
-
 	public:
 		// Constructors
-		CButton(float x, float y, float width, float height, sf::Font* Font, std::string text, sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor);
+		CButton(float x, float y, float width, float height, sf::Font& Font, std::string text, sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor);
 		~CButton();
 
 		//Accessors
@@ -42,7 +40,7 @@ class CButton
 
 		//Functions
 		void Update(const sf::Vector2f mousePos);
-		void Render(sf::RenderTarget* target);
+		void Render(sf::RenderTarget& target);
 
 };
 
