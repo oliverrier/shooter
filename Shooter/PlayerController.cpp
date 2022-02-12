@@ -7,18 +7,18 @@ CPlayerController::CPlayerController(float maxVelocity):CController(maxVelocity)
 
 void CPlayerController::UpdateLogic(const float& dt, CEntity& entity)
 {
-	float directionX = 0;
-	float directionY = 0;
+	float directionX = 0.f;
+	float directionY = 0.f;
 
 	//Update player input
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-		directionX = -5.f;
+		--directionX;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		directionX = 5.f;
+		++directionX;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-		directionY = -5.f;
+		--directionY;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		directionY = 5.f;
+		++directionY;
 
 	MoveAllSprites(dt, entity.GetSpritesComponent(), directionX, directionY);
 

@@ -2,15 +2,7 @@
 #define TEXTUREDICTIONARY_H
 
 
-#include<iostream>
-#include<stack>
-#include<vector>
-#include<map>
-
-//SFML
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-#include "TexturesManager.h"
+#include "Common.h"
 
 class CTextureDictionary
 {

@@ -156,7 +156,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Common.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="VectorMath.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
