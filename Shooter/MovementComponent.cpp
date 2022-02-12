@@ -12,14 +12,18 @@ CMovementComponent::~CMovementComponent()
 //functions
 void CMovementComponent::Move(const float& dt, sf::Sprite& sprite, const float directionX, const float directionY)
 {
-
-	//Penser à faire un normalize
 	Velocity.x = directionX;
 	Velocity.y = directionY;
 
+	sprite.move(Normalized(Velocity) * MaxVelocity * dt);
+}
 
-	sprite.move(Normalized(Velocity) * MaxVelocity * dt); // Uses velocity
+void CMovementComponent::Move(const float& dt, sf::Shape& shape, const float directionX, const float directionY)
+{
+	Velocity.x = directionX;
+	Velocity.y = directionY;
 
+	shape.move(Normalized(Velocity) * MaxVelocity * dt);
 }
 
 void CMovementComponent::Update(const float& dt)

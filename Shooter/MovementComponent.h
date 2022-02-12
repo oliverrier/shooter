@@ -22,7 +22,8 @@ public:
 	const sf::Vector2f& GetVelocity() const;
 
 	//functions
-	void Move(const float& dt, sf::Sprite& sprite,const float directionX, const float directionY );
+	void Move(const float& dt, sf::Sprite& sprite, const float directionX, const float directionY);
+	void Move(const float& dt, sf::Shape& shape,const float directionX, const float directionY );
 	void Update(const float& dt);
 };
 
