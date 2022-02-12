@@ -30,7 +30,7 @@ void CFirstLevel::AddBackground(float positionX)
 	Backgrounds.push_back(*new sf::RectangleShape());
 	Backgrounds.back().setSize(sf::Vector2f((float)Window.getSize().x, (float)Window.getSize().y));
 	Backgrounds.back().setTexture(&CTextureDictionary::GetTexture("BACKGROUND_SPACE"));
-	Backgrounds.back().setPosition({ positionX,0 });
+	Backgrounds.back().setPosition({ positionX, 0 });
 }
 
 
