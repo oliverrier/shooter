@@ -3,7 +3,7 @@
 
 
 #include "Scene.h"
-class CFirstLevel : public CScene
+class CLevel : public CScene
 {
 
 private:
@@ -19,8 +19,8 @@ private:
     void AddBackground(float positionX);
 
 public:
-    CFirstLevel(sf::RenderWindow& window, std::stack<CScene*>& states);
-    virtual ~CFirstLevel();
+    CLevel(sf::RenderWindow& window, std::stack<CScene*>& states);
+    virtual ~CLevel();
 
 
     virtual void UpdateInput(const float& dt);

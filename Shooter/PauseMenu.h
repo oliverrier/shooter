@@ -4,31 +4,32 @@
 
 #include "Level.h"
 #include "Button.h"
- 
- 
-class CMainMenu :
+
+
+class CPauseMenu :
     public CScene
 {
 
 private:
     //variables
-    sf::Music Music;
     sf::RectangleShape Background;
     sf::Font Font;
+    sf::Text TitlePauseMenu;
+
 
     std::map<std::string, CButton*> Buttons;
 
     //Functions
     void InitBackground();
-    void InitMusic();
     void InitFonts();
+    void InitTitlePauseMenu();
     void InitButtons();
 
 
 public:
 
-    CMainMenu(sf::RenderWindow& window, std::stack<CScene*>& states);
-    virtual ~CMainMenu();
+    CPauseMenu(sf::RenderWindow& window, std::stack<CScene*>& states);
+    virtual ~CPauseMenu();
 
     void UpdateInput(const float& dt);
     void UpdateButtons();

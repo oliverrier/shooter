@@ -1,7 +1,7 @@
 #include "Game.h"
 
 // contructors - destructor
-CGame::CGame():Window(*new sf::RenderWindow(sf::VideoMode(1920, 1080, DesktopMode.bitsPerPixel), "R-Type Final 2")) {
+CGame::CGame() :Window(*new sf::RenderWindow(sf::VideoMode(1920, 1080, DesktopMode.bitsPerPixel), "R-Type Final 2")) {
 	InitWindow();
 	InitStates();
 }
@@ -9,9 +9,9 @@ CGame::CGame():Window(*new sf::RenderWindow(sf::VideoMode(1920, 1080, DesktopMod
 CGame::~CGame() {
 	delete &Window;
 
-	while (!States.empty()) {
-		delete States.top();
-		States.pop();
+	while (!Scenes.empty()) {
+		delete Scenes.top();
+		Scenes.pop();
 	}
 }
 
@@ -29,7 +29,7 @@ void CGame::InitWindow() {
 
 void CGame::InitStates()
 {
-	States.push(new CMainMenu(Window, States));
+	Scenes.push(new CMainMenu(Window, Scenes));
 }
 
 void CGame::EndApplication()
@@ -55,13 +55,15 @@ void CGame::UpdateSFMLEvents() {
 void CGame::Update() {
 	UpdateSFMLEvents();
 
-	if (!States.empty()) {
-		States.top()->Update(DeltaTime);
-
-		if (States.top()->GetQuit()) {
-			States.top()->EndState();
-			delete States.top();
-			States.pop();
+	if (!Scenes.empty()) {
+		Scenes.top()->Update(DeltaTime);
+		const int numberOfSceneToDelete = Scenes.top()->GetNumberOfTopScenesToDelete();
+		if (numberOfSceneToDelete > 0) {
+			for (int i = 0; i < numberOfSceneToDelete; ++i)
+			{
+				delete Scenes.top();
+				Scenes.pop();
+			}
 		}
 	}
 	//Application end
@@ -76,8 +78,8 @@ void CGame::Render() {
 	Window.clear();
 
 	// render items
-	if (!States.empty())
-		States.top()->Render(Window); 
+	if (!Scenes.empty())
+		Scenes.top()->Render(Window); 
 
 	Window.display();
 }

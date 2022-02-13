@@ -21,7 +21,6 @@ class CButton
 		int ButtonState;
 
 		sf::RectangleShape Shape;        
-		sf::Font& Font;
 		sf::Text Text;
 
 
