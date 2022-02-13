@@ -8,13 +8,13 @@ CEntity::CEntity(const char* name, CController& controller, std::map<const char*
 
 CEntity::CEntity(const char* name, CController& controller, SSpriteComponent spriteComponent): Name(name), Controller(controller), ParentEntity(nullptr)
 {
-	SpritesComponent["root"] = spriteComponent;
+	SpritesComponent["ROOT"] = spriteComponent;
 	InitSprites();
 }
 
 CEntity::CEntity(const char* name, CController& controller, sf::Sprite sprite): Name(name), Controller(controller), ParentEntity(nullptr)
 {
-	SpritesComponent["root"] = *new SSpriteComponent(sprite);
+	SpritesComponent["ROOT"] = *new SSpriteComponent(sprite);
 }
 
 CEntity::~CEntity()
@@ -34,7 +34,10 @@ void CEntity::InitSprites()
 		sprite.setScale(spriteComponent.DefaultScaleX, spriteComponent.DefaultScaleY);
 		sprite.setRotation(spriteComponent.DefaultRotation);
 		sprite.setOrigin(spriteComponent.DefaultOriginX, spriteComponent.DefaultOriginY);
+
 	}
+
+	
 }
 
 
@@ -116,7 +119,6 @@ void CEntity::DetachChildEntities()
 void CEntity::Update(const float& dt)
 {
 	Controller.UpdateLogic(dt, *this);
-
 }
 
 void CEntity::RecursiveSpriteRender(sf::RenderTarget& target, SSpriteComponent& spriteComponent)
@@ -131,7 +133,7 @@ void CEntity::RecursiveSpriteRender(sf::RenderTarget& target, SSpriteComponent& 
 
 void CEntity::Render(sf::RenderTarget& target)
 {
-	RecursiveSpriteRender(target, SpritesComponent["root"]);
+	RecursiveSpriteRender(target, SpritesComponent["ROOT"]);
 }
 
 

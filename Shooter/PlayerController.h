@@ -9,7 +9,7 @@ class CPlayerController :
     public CController
 {
 public:
-	CPlayerController(float maxVelocity);
+	CPlayerController(sf::RenderWindow& window, float maxVelocity);
 
 
 	//functions

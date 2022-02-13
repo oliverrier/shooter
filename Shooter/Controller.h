@@ -10,11 +10,12 @@ class CEntity;
 
 class CController
 {
-private:
+protected:
 	CMovementComponent& MovementComponent;
+	sf::RenderWindow& Window;
 
 public:
-	CController(float maxVelocity);
+	CController(sf::RenderWindow& window, float maxVelocity);
 	virtual ~CController();
 
 

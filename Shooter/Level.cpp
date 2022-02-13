@@ -3,7 +3,7 @@
 #include "PauseMenu.h"
 
 CLevel::CLevel(sf::RenderWindow& window, std::stack<CScene*>& states ) : CScene(window, states), 
-SpaceshipPlayer(*new CEntity("PLAYER", *new CPlayerController(250), *new SSpriteComponent(*new sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BASE_IDLE")), 0.5, 0.5))),
+SpaceshipPlayer(*new CEntity("PLAYER", *new CPlayerController(Window, 250), *new SSpriteComponent(*new sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BASE_IDLE")), 0.5, 0.5))),
 MovementComponent(*new CMovementComponent(100))
 {
 	AddBackground(0.f);
