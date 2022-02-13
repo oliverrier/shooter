@@ -28,8 +28,8 @@ public:
 	std::map<const char*, CEntity*>& GetChildEntities();
 
 	//Functions
-	virtual void SetChildSprite(const char* keyName, SSpriteComponent& spriteComponent, const char* parentKey = "root");
-	virtual void SetChildSprite(const char* keyName, sf::Sprite& sprite, const char* parentKey = "root");
+	virtual void SetChildSprite(const char* keyName, SSpriteComponent& spriteComponent, const char* parentKey = "ROOT");
+	virtual void SetChildSprite(const char* keyName, sf::Sprite& sprite, const char* parentKey = "ROOT");
 	virtual void RemoveSprite(const char* keyName);
 
 	virtual void SetParentEntity(CEntity* parentEntity);

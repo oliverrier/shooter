@@ -1,7 +1,7 @@
 
 #include "Controller.h"
 
-CController::CController(float maxVelocity):MovementComponent(*new CMovementComponent(maxVelocity))
+CController::CController(sf::RenderWindow& window, float maxVelocity):MovementComponent(*new CMovementComponent(maxVelocity)), Window(window)
 {
 }
 
