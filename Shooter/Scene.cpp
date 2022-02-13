@@ -1,21 +1,21 @@
 #include "Scene.h"
 
 
-CScene::CScene(sf::RenderWindow& window, std::stack<CScene*>& states): Window(window), Quit(false),States(states) {
+CScene::CScene(sf::RenderWindow& window, std::stack<CScene*>& states): Window(window), NumberOfTopScenesToDelete(0),Scenes(states) {
 }
 
 CScene::~CScene() {
 
 }
 
-const bool& CScene::GetQuit() const
+const int& CScene::GetNumberOfTopScenesToDelete() const
 {
-	return Quit;
+	return NumberOfTopScenesToDelete;
 }
 
-void CScene::EndState()
+void CScene::SetNumberOfTopScenesToDelete(int number)
 {
-	Quit = true;
+	NumberOfTopScenesToDelete = number;
 }
 
 

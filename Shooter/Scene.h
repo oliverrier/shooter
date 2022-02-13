@@ -7,9 +7,9 @@ class CScene
 {
 
 protected:
-	std::stack<CScene*>& States;
+	std::stack<CScene*>& Scenes;
 	sf::RenderWindow& Window;
-	bool Quit;
+	int NumberOfTopScenesToDelete;
 
 	sf::Vector2i MousePosScreen;
 	sf::Vector2i MousePosWindow;
@@ -19,9 +19,9 @@ public:
 	CScene(sf::RenderWindow& window, std::stack<CScene*>& states);
 	virtual ~CScene();
 
-	const bool& GetQuit() const;
+	const int& GetNumberOfTopScenesToDelete() const;
 
-	void EndState();
+	void SetNumberOfTopScenesToDelete(int number);
 
 	virtual void UpdateMousePosition();
 	virtual void UpdateInput(const float& dt) = 0;

@@ -19,7 +19,7 @@ private:
 	sf::Clock DeltaTimeClock;
 	float DeltaTime;
 
-	std::stack<CScene*> States;
+	std::stack<CScene*> Scenes;
 		
 	// functions
 	void InitWindow();

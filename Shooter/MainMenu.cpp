@@ -66,13 +66,13 @@ void CMainMenu::UpdateButtons()
 	if (Buttons["GAME_STATE"]->IsPressed())
 	{
 		Music.stop();
-		States.push(new CFirstLevel(Window, States));
+		Scenes.push(new CLevel(Window, Scenes));
 	}
 
 	//Quit the game
 	if (Buttons["EXIT_STATE"]->IsPressed())
 	{
-		EndState();
+		SetNumberOfTopScenesToDelete(1);
 	}
 }
 

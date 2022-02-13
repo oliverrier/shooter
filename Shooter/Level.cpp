@@ -1,23 +1,23 @@
- #include "FirstLevel.h"
+#include "Level.h"
 #include "PlayerController.h"
+#include "PauseMenu.h"
 
-
-CFirstLevel::CFirstLevel(sf::RenderWindow& window, std::stack<CScene*>& states ) : CScene(window, states), 
+CLevel::CLevel(sf::RenderWindow& window, std::stack<CScene*>& states ) : CScene(window, states), 
 SpaceshipPlayer(*new CEntity("PLAYER", *new CPlayerController(250), *new SSpriteComponent(*new sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BASE_IDLE")), 0.5, 0.5))),
 MovementComponent(*new CMovementComponent(100))
 {
-	AddBackground(0);
-	AddBackground(Window.getSize().x);
+	AddBackground(0.f);
+	AddBackground((float)Window.getSize().x);
 
 	InitMusic();
 }
 
-CFirstLevel::~CFirstLevel()
+CLevel::~CLevel()
 {
 	delete &SpaceshipPlayer;
 }
 
-void CFirstLevel::InitMusic() {
+void CLevel::InitMusic() {
 	// Load a music to play
 	if (!Music.openFromFile("asset/musics/r-type-final-2-ost-investigation-abandoned-space-city.wav"))
 		throw "ERROR:MAIN_MENU_STATE::FAILED_TO_LOAD_MUSIC";
@@ -25,7 +25,7 @@ void CFirstLevel::InitMusic() {
 	Music.play();
 }
 
-void CFirstLevel::AddBackground(float positionX)
+void CLevel::AddBackground(float positionX)
 {
 	Backgrounds.push_back(*new sf::RectangleShape());
 	Backgrounds.back().setSize(sf::Vector2f((float)Window.getSize().x, (float)Window.getSize().y));
@@ -35,14 +35,15 @@ void CFirstLevel::AddBackground(float positionX)
 
 
 //functions
-void CFirstLevel::UpdateInput(const float& dt)
+void CLevel::UpdateInput(const float& dt)
 {
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-		EndState();
+		Scenes.push(new CPauseMenu(Window, Scenes));
+
 }
 
-void CFirstLevel::UpdateBackground(const float& dt)
+void CLevel::UpdateBackground(const float& dt)
 {
 	for (auto& background : Backgrounds)
 	{
@@ -52,11 +53,11 @@ void CFirstLevel::UpdateBackground(const float& dt)
 	if (rightSideFirstBackgroundPosition < 0)
 	{
 		Backgrounds.pop_front();
-		AddBackground(Window.getSize().x);
+		AddBackground((float)Window.getSize().x);
 	}
 }
 
-void CFirstLevel::Update(const float& dt)
+void CLevel::Update(const float& dt)
 {
 	UpdateMousePosition();
 	UpdateInput(dt);
@@ -65,7 +66,7 @@ void CFirstLevel::Update(const float& dt)
 	SpaceshipPlayer.Update(dt);
 }
 
-void CFirstLevel::Render(sf::RenderTarget& target)
+void CLevel::Render(sf::RenderTarget& target)
 {
 	for (auto& background : Backgrounds)
 	{
