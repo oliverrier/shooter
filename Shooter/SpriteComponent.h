@@ -11,7 +11,7 @@ struct SSpriteComponent
 	const char* ParentKey = nullptr;
 	std::vector<const char*> ChildKeys;
 
-	SSpriteComponent() : Sprite(*new sf::Sprite()) {};
+	SSpriteComponent() : Sprite(sf::Sprite()) {};
 
 	SSpriteComponent(sf::Sprite sprite) : Sprite(sprite) {};
 	SSpriteComponent(sf::Sprite sprite, const char* parentKey) : Sprite(sprite), ParentKey(parentKey) {};

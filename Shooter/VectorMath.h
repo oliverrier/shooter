@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <math.h>
+#include <cmath>
+#include <cassert>
 
 
 /// <summary>
@@ -8,7 +9,7 @@
 /// </summary>
 inline float Length(const sf::Vector2f& vector2D)
 {
-    return sqrtf( (vector2D.x * vector2D.x) + (vector2D.y * vector2D.y) );
+    return std::sqrt( (vector2D.x * vector2D.x) + (vector2D.y * vector2D.y) );
 }
 
 /// <summary>
@@ -17,6 +18,10 @@ inline float Length(const sf::Vector2f& vector2D)
 /// </summary>
 inline sf::Vector2f Normalized(const sf::Vector2f& vector2D)
 {
-    const float norm = sqrtf(powf(vector2D.x, 2) + powf(vector2D.y, 2));
-    return norm > 0 ? *new sf::Vector2f(vector2D.x / norm, vector2D.y / norm ) : *new sf::Vector2f(vector2D.x, vector2D.y);
+    if (vector2D.x == 0.f && vector2D.y == 0.f) {
+        return vector2D;
+    }
+    const float norm = std::sqrt((vector2D.x * vector2D.x) + (vector2D.y * vector2D.y));
+    return vector2D / norm;
 }
+

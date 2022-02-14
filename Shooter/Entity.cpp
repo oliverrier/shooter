@@ -14,7 +14,7 @@ CEntity::CEntity(const char* name, CController& controller, SSpriteComponent spr
 
 CEntity::CEntity(const char* name, CController& controller, sf::Sprite sprite): Name(name), Controller(controller), ParentEntity(nullptr)
 {
-	SpritesComponent["ROOT"] = *new SSpriteComponent(sprite);
+	SpritesComponent["ROOT"] = SSpriteComponent(sprite);
 }
 
 CEntity::~CEntity()
@@ -63,7 +63,7 @@ std::map<const char*, CEntity*>& CEntity::GetChildEntities()
 
 void CEntity::SetChildSprite(const char* keyName, sf::Sprite& sprite, const char* parentKey)
 {
-	SSpriteComponent spriteComponent = *new SSpriteComponent(sprite, parentKey);
+	auto spriteComponent = SSpriteComponent(sprite, parentKey);
 	SpritesComponent[parentKey].ChildKeys.push_back(keyName);
 	SpritesComponent[keyName] = spriteComponent;
 }
