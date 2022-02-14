@@ -3,7 +3,7 @@
 
 #include "Controller.h"
 
-class CEntity
+class CEntity : public SSpriteComponent
 {
 protected:
 	const char* Name;
