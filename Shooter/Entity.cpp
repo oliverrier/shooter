@@ -1,59 +1,22 @@
 #include "Entity.h"
 
-
-CEntity::CEntity(const char* name, CController& controller, std::map<const char*, SSpriteComponent> spritesComponent): Name(name), Controller(controller), SpritesComponent(spritesComponent), ParentEntity(nullptr)
+CEntity::CEntity(const char* name, sf::Sprite sprite): Name(name), Sprite(sprite), ParentEntity(nullptr)
 {
-	InitSprites();
-}
-
-CEntity::CEntity(const char* name, CController& controller, SSpriteComponent spriteComponent): Name(name), Controller(controller), ParentEntity(nullptr)
-{
-	SpritesComponent["ROOT"] = spriteComponent;
-	InitSprites();
-}
-
-CEntity::CEntity(const char* name, CController& controller, sf::Sprite sprite): Name(name), Controller(controller), ParentEntity(nullptr)
-{
-	SpritesComponent["ROOT"] = SSpriteComponent(sprite);
 }
 
 CEntity::~CEntity()
 {
-	delete& Controller;
+	if (ParentEntity != nullptr)
+	{
+		DetachFromParentEntity();
+	}
 	ChildEntities.clear();
 }
 
 
-void CEntity::InitSprites()
+sf::Sprite& CEntity::GetSprite()
 {
-	for (auto& item : SpritesComponent) {
-		SSpriteComponent& spriteComponent = item.second;
-		sf::Sprite& sprite = spriteComponent.Sprite;
-
-		sprite.setPosition(spriteComponent.DefaultPositionX, spriteComponent.DefaultPositionY);
-		sprite.setScale(spriteComponent.DefaultScaleX, spriteComponent.DefaultScaleY);
-		sprite.setRotation(spriteComponent.DefaultRotation);
-		sprite.setOrigin(spriteComponent.DefaultOriginX, spriteComponent.DefaultOriginY);
-
-	}
-
-	
-}
-
-
-
-
-void CEntity::SetChildSprite(const char* keyName, SSpriteComponent& spriteComponent, const char* parentKey)
-{
-	RemoveKeyChildFromParent(keyName, spriteComponent.ParentKey);
-	spriteComponent.ParentKey = parentKey;
-	SpritesComponent[parentKey].ChildKeys.push_back(keyName);
-	SpritesComponent[keyName] = spriteComponent;
-}
-
-std::map<const char*, SSpriteComponent>& CEntity::GetSpritesComponent()
-{
-	return SpritesComponent;
+	return Sprite;
 }
 
 std::map<const char*, CEntity*>& CEntity::GetChildEntities()
@@ -61,28 +24,6 @@ std::map<const char*, CEntity*>& CEntity::GetChildEntities()
 	return ChildEntities;
 }
 
-void CEntity::SetChildSprite(const char* keyName, sf::Sprite& sprite, const char* parentKey)
-{
-	auto spriteComponent = SSpriteComponent(sprite, parentKey);
-	SpritesComponent[parentKey].ChildKeys.push_back(keyName);
-	SpritesComponent[keyName] = spriteComponent;
-}
-
-void CEntity::RemoveKeyChildFromParent(const char* childKey, const char* parentKey)
-{
-	if (parentKey != nullptr)
-	{
-		std::vector<const char*>& childKeys = SpritesComponent[parentKey].ChildKeys;
-		std::vector<const char*>::iterator iterator = std::find(childKeys.begin(), childKeys.end(), childKey);
-		if (iterator != childKeys.end()) childKeys.erase(iterator);
-	}
-}
-
-void CEntity::RemoveSprite(const char* keyName)
-{
-	RemoveKeyChildFromParent(keyName, SpritesComponent[keyName].ParentKey);
-	SpritesComponent.erase(keyName);
-}
 
 void CEntity::SetParentEntity(CEntity* parentEntity)
 {
@@ -115,25 +56,9 @@ void CEntity::DetachChildEntities()
 	}
 }
 
-
-void CEntity::Update(const float& dt)
-{
-	Controller.UpdateLogic(dt, *this);
-}
-
-void CEntity::RecursiveSpriteRender(sf::RenderTarget& target, SSpriteComponent& spriteComponent)
-{
-	target.draw(spriteComponent.Sprite);
-
-	for (const char* key : spriteComponent.ChildKeys) {
-		RecursiveSpriteRender(target, SpritesComponent[key]);
-	}
-
-}
-
 void CEntity::Render(sf::RenderTarget& target)
 {
-	RecursiveSpriteRender(target, SpritesComponent["ROOT"]);
+	target.draw(Sprite);
 }
 
 

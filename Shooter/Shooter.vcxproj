@@ -167,7 +167,6 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MovementComponent.h" />
-    <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="TextureDictionary.h" />
   </ItemGroup>
