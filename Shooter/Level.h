@@ -3,16 +3,17 @@
 
 
 #include "Scene.h"
+
 class CLevel : public CScene
 {
 
 private:
     sf::Music Music;
 
-    CEntity& SpaceshipPlayer;
+    CEntity PlayerEntity;
+    CPlayerController PlayerController;
     std::deque<sf::RectangleShape> Backgrounds;
     CMovementComponent MovementComponent;
-
 
     //functions
     void InitMusic();

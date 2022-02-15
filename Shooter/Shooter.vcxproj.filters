@@ -16,9 +16,6 @@
     <Filter Include="Entities">
       <UniqueIdentifier>{d04fa205-b524-457c-8543-ad21ffae97f7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="States">
-      <UniqueIdentifier>{024cefb8-6941-4587-949f-fa18e78f6afd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components">
       <UniqueIdentifier>{4d79122d-a425-43e8-9dc9-3c6fec3f4193}</UniqueIdentifier>
     </Filter>
@@ -27,6 +24,9 @@
     </Filter>
     <Filter Include="Utils">
       <UniqueIdentifier>{b888382c-c8f3-4fdd-94ce-72fc12ec2bf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{024cefb8-6941-4587-949f-fa18e78f6afd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -37,13 +37,13 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>States</Filter>
+      <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
-      <Filter>States</Filter>
+      <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
-      <Filter>States</Filter>
+      <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Entities</Filter>
@@ -64,7 +64,7 @@
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="PauseMenu.cpp">
-      <Filter>States</Filter>
+      <Filter>Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,13 +72,13 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
-      <Filter>States</Filter>
+      <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.h">
-      <Filter>States</Filter>
+      <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>States</Filter>
+      <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Fichiers de ressources</Filter>
@@ -95,9 +95,6 @@
     <ClInclude Include="PlayerController.h">
       <Filter>Controllers</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="TextureDictionary.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -108,7 +105,7 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="PauseMenu.h">
-      <Filter>States</Filter>
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

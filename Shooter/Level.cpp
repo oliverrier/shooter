@@ -1,20 +1,22 @@
 #include "Level.h"
 #include "PlayerController.h"
+#include "MovementComponent.h"
 #include "PauseMenu.h"
 
-CLevel::CLevel(sf::RenderWindow& window, std::stack<CScene*>& states ) : CScene(window, states), 
-SpaceshipPlayer(*new CEntity("PLAYER", *new CPlayerController(Window, 250), *new SSpriteComponent(*new sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BASE_IDLE")), 0.5, 0.5))),
-MovementComponent(*new CMovementComponent(100))
+CLevel::CLevel(sf::RenderWindow& window, std::stack<CScene*>& states) : CScene(window, states),
+PlayerEntity(CEntity("PLAYER", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BASE_IDLE")))),
+PlayerController(CPlayerController(Window, 250)),
+MovementComponent(CMovementComponent(100.f))
 {
 	AddBackground(0.f);
 	AddBackground((float)Window.getSize().x);
 
 	InitMusic();
+	PlayerEntity.GetSprite().setScale({ 0.5, 0.5 });
 }
 
 CLevel::~CLevel()
 {
-	delete &SpaceshipPlayer;
 }
 
 void CLevel::InitMusic() {
@@ -63,7 +65,7 @@ void CLevel::Update(const float& dt)
 	UpdateInput(dt);
 	UpdateBackground(dt);
 
-	SpaceshipPlayer.Update(dt);
+	PlayerController.UpdateLogic(dt, PlayerEntity);
 }
 
 void CLevel::Render(sf::RenderTarget& target)
@@ -72,5 +74,5 @@ void CLevel::Render(sf::RenderTarget& target)
 	{
 		target.draw(background);
 	}
-	SpaceshipPlayer.Render(target);
+	PlayerEntity.Render(target);
 }
