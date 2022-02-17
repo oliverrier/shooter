@@ -21,7 +21,6 @@ void CPlayerController::UpdateLogic(const float& dt, CEntity& entity)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && globalBounds.top + globalBounds.height < viewport.top + viewport.height)
 		++directionY;
 
-	std::cout << "bite" << std::endl;
 	Move(dt, entity.GetSprite(), directionX, directionY);
 
 	for (auto& child : entity.GetChildEntities())
