@@ -12,12 +12,12 @@ private:
 
     CEntity PlayerEntity;
     CPlayerController PlayerController;
-    std::deque<sf::RectangleShape> Backgrounds;
+    sf::RectangleShape Backgrounds[2];
     CMovementComponent MovementComponent;
 
     //functions
     void InitMusic();
-    void AddBackground(float positionX);
+    void InitBackgrounds();
 
 public:
     CLevel(sf::RenderWindow& window, std::stack<CScene*>& states);

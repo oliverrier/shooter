@@ -8,10 +8,9 @@ PlayerEntity(CEntity("PLAYER", sf::Sprite(CTextureDictionary::GetTexture("SPACES
 PlayerController(CPlayerController(Window, 250)),
 MovementComponent(CMovementComponent(100.f))
 {
-	AddBackground(0.f);
-	AddBackground((float)Window.getSize().x);
-
+	InitBackgrounds();
 	InitMusic();
+
 	PlayerEntity.GetSprite().setScale({ 0.5, 0.5 });
 }
 
@@ -27,12 +26,15 @@ void CLevel::InitMusic() {
 	Music.play();
 }
 
-void CLevel::AddBackground(float positionX)
+void CLevel::InitBackgrounds()
 {
-	Backgrounds.push_back(*new sf::RectangleShape());
-	Backgrounds.back().setSize(sf::Vector2f((float)Window.getSize().x, (float)Window.getSize().y));
-	Backgrounds.back().setTexture(&CTextureDictionary::GetTexture("BACKGROUND_SPACE"));
-	Backgrounds.back().setPosition({ positionX, 0 });
+	for (auto& background : Backgrounds)
+	{
+		background.setSize(sf::Vector2f((float)Window.getSize().x, (float)Window.getSize().y));
+		background.setTexture(&CTextureDictionary::GetTexture("BACKGROUND_SPACE"));
+	}
+	Backgrounds[0].setPosition({ 0.f, 0.f });
+	Backgrounds[1].setPosition({ (float)Window.getSize().x, 0.f });
 }
 
 
@@ -50,13 +52,13 @@ void CLevel::UpdateBackground(const float& dt)
 	for (auto& background : Backgrounds)
 	{
 		MovementComponent.Move(dt, background, -1, 0);
+		const float rightSideBackgroundPosition = background.getGlobalBounds().left + background.getGlobalBounds().width;
+		if (rightSideBackgroundPosition < 0)
+		{
+			background.setPosition({ (float)Window.getSize().x, 0.f });
+		}
 	}
-	const float rightSideFirstBackgroundPosition = Backgrounds.front().getGlobalBounds().left + Backgrounds.front().getGlobalBounds().width;
-	if (rightSideFirstBackgroundPosition < 0)
-	{
-		Backgrounds.pop_front();
-		AddBackground((float)Window.getSize().x);
-	}
+
 }
 
 void CLevel::Update(const float& dt)
