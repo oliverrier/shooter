@@ -81,6 +81,9 @@
     <ClCompile Include="BaseProjectileEntity.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerEntity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -135,6 +138,9 @@
       <Filter>Controllers</Filter>
     </ClInclude>
     <ClInclude Include="BaseProjectileEntity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerEntity.h">
       <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>

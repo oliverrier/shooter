@@ -4,8 +4,11 @@
 
 #include "Scene.h"
 #include "AiEntity.h"
+#include "PlayerEntity.h"
+#include "BaseWeaponEntity.h"
 #include "PlayerController.h"
 #include "AiController.h"
+#include "BaseProjectileController.h"
 
 class CLevel : public CScene
 {
@@ -13,7 +16,7 @@ class CLevel : public CScene
 private:
     sf::Music Music;
 
-    CEntity PlayerEntity;
+    CPlayerEntity PlayerEntity;
 	CPlayerController PlayerController;
 	CBaseProjectileController ProjectileController;
     CAiController AiController;
@@ -38,7 +41,7 @@ public:
 
     void Update(const float& dt);
     void Render(sf::RenderTarget& target);
-
+	void SpawnProjectile(CEntity& entity);
 };
 
 #endif

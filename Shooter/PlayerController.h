@@ -3,18 +3,21 @@
 
 #include "Controller.h"
 
+class CPlayerEntity;
+
 class CPlayerController :
 	public CController
 
 {
-public:
-	CPlayerController(sf::RenderWindow& window, float maxVelocity);
+protected:
 	sf::RenderWindow& Window;
 
+public:
+	CPlayerController(sf::RenderWindow& window, float maxVelocity);
 
 
 	//functions
-	void UpdateLogic(const float& dt, CEntity& entity);
+	void UpdateLogic(const float& dt, CPlayerEntity& entity);
 };
 
 #endif

@@ -20,7 +20,9 @@ public:
 
 	//getter and setters
 	sf::Sprite& GetSprite();
+	CEntity* GetChildEntity(const char* name);
 	std::map<const char*, CEntity*>& GetChildEntities();
+	const char* GetName();
 
 	//Functions
 	virtual void SetParentEntity(CEntity* parentEntity);

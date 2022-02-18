@@ -1,5 +1,5 @@
 #include "BaseProjectileController.h"
-#include "Entity.h"
+#include "BaseProjectileEntity.h"
 
 
 
@@ -13,7 +13,7 @@ CBaseProjectileController::~CBaseProjectileController()
 {
 }
 
-void CBaseProjectileController::UpdateLogic(const float& dt, CEntity& entity)
+void CBaseProjectileController::UpdateLogic(const float& dt, CBaseProjectileEntity& entity)
 {
 	float directionX = 1.f;
 	float directionY = 0.f;

@@ -1,4 +1,5 @@
 #include "BaseWeaponEntity.h"
+#include "TextureDictionary.h"
 
 
 
@@ -16,5 +17,4 @@ void CBaseWeaponEntity::Use() {
 
 	CBaseProjectileEntity* projectile = new CBaseProjectileEntity("BASE_PROJECTILE", sf::Sprite(CTextureDictionary::GetTexture("BASE_PROJECTILE")));
 	projectile->GetSprite().setPosition(GetPositionMiddleRight(projectile->GetSprite(), Sprite));
-	SetChildEntity(projectile);
 }

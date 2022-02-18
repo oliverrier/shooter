@@ -1,4 +1,5 @@
 #include "BaseWeaponEntity.h"
+#include <iostream>
 
 CEntity::CEntity(const char* name, sf::Sprite sprite): Name(name), Sprite(sprite), ParentEntity(nullptr)
 {
@@ -19,9 +20,18 @@ sf::Sprite& CEntity::GetSprite()
 	return Sprite;
 }
 
+CEntity* CEntity::GetChildEntity(const char* name) 
+{
+	return ChildEntities[name];
+}
+
 std::map<const char*, CEntity*>& CEntity::GetChildEntities()
 {
 	return ChildEntities;
+}
+
+const char* CEntity::GetName() {
+	return Name;
 }
 
 
@@ -39,7 +49,8 @@ void CEntity::SetChildEntity(CEntity* childEntity)
 
 void CEntity::DetachFromParentEntity()
 {
-	ParentEntity->ChildEntities.erase(Name);
+	auto removed = ParentEntity->ChildEntities.erase(Name);
+	std::cout << "removed : " << removed << std::endl;
 	ParentEntity = nullptr;
 }
 
@@ -61,7 +72,12 @@ void CEntity::Render(sf::RenderTarget& target)
 	target.draw(Sprite);
 	for (auto& child : ChildEntities)
 	{
-		child.second->Render(target);
+		if (child.second != nullptr)
+		{
+			child.second->Render(target);
+		}
+			
+
 	}
 }
 

@@ -1,7 +1,7 @@
 #include "AiController.h"
 #include "AiEntity.h"
 
-CAiController::CAiController(sf::RenderWindow& window, float maxVelocity): CController(window, maxVelocity)
+CAiController::CAiController(sf::RenderWindow& window, float maxVelocity): CController(maxVelocity), Window{window}
 {
 
 }

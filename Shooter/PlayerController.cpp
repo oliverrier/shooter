@@ -1,13 +1,15 @@
 #include "PlayerController.h"
 #include "BaseWeaponEntity.h"
+#include "Level.h"
+#include "PlayerEntity.h"
 
 CPlayerController::CPlayerController(sf::RenderWindow& window, float maxVelocity):CController(maxVelocity), Window(window)
 {
 }
 
-void CPlayerController::UpdateLogic(const float& dt, CEntity& entity)
+void CPlayerController::UpdateLogic(const float& dt, CPlayerEntity& player)
 {
-	const sf::FloatRect globalBounds = entity.GetSprite().getGlobalBounds();
+	const sf::FloatRect globalBounds = player.GetSprite().getGlobalBounds();
 	const sf::FloatRect viewport = (sf::FloatRect) Window.getViewport(Window.getView());
 
 	float directionX = 0.f, directionY = 0.f;
@@ -20,14 +22,14 @@ void CPlayerController::UpdateLogic(const float& dt, CEntity& entity)
 		--directionY;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && globalBounds.top + globalBounds.height < viewport.top + viewport.height)
 		++directionY;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && entity.GetChildEntities()["SOLAR_WEAPON"] != nullptr)
-		((CBaseWeaponEntity*)entity.GetChildEntities()["SOLAR_WEAPON"])->Use();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && player.GetChildEntities()["SOLAR_WEAPON"] != nullptr)
+		player.GetCurrentLevel().SpawnProjectile(player);
 
-	Move(dt, entity.GetSprite(), directionX, directionY);
+	Move(dt, player.GetSprite(), directionX, directionY);
 
-	for (auto& child : entity.GetChildEntities())
+	for (auto& child : player.GetChildEntities())
 	{
-		if(std::string(child.first).find("_PROJECTILE") == std::string::npos)
+		if(child.second != nullptr)
 			Move(dt, child.second->GetSprite(), directionX, directionY);
 	}
 }

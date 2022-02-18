@@ -8,6 +8,9 @@ class CAiEntity;
 class CAiController :
 	public CController
 {
+protected:
+	sf::RenderWindow& Window;
+
 public:
 	CAiController(sf::RenderWindow& window, float maxVelocity);
 

@@ -1,9 +1,8 @@
 #include "Level.h"
 #include "PauseMenu.h"
-#include "BaseWeaponEntity.h"
 
 CLevel::CLevel(sf::RenderWindow& window, std::stack<CScene*>& states) : CScene(window, states),
-PlayerEntity(CEntity("PLAYER", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BASE_IDLE")))),
+PlayerEntity(CPlayerEntity("PLAYER", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BASE_IDLE")), *this)),
 PlayerController(CPlayerController(Window, 250)),
 ProjectileController(CBaseProjectileController(500)),
 AiController(CAiController(Window, 150)),
@@ -12,10 +11,10 @@ MovementComponent(CMovementComponent(100.f))
 	InitBackgrounds();
 	InitMusic();
 	InitWaves();
-	PlayerEntity.GetSprite().setScale({ 0.25, 0.25 });
+	PlayerEntity.GetSprite().setScale({ 0.25f, 0.25f });
 	CBaseWeaponEntity* weapon = new CBaseWeaponEntity("SOLAR_WEAPON", sf::Sprite(CTextureDictionary::GetTexture("SOLAR_WEAPON")));
 	PlayerEntity.SetChildEntity(weapon);
-	weapon->GetSprite().setScale({ 0.40, 0.40 });
+	weapon->GetSprite().setScale({ 0.4f, 0.4f });
 	weapon->GetSprite().setPosition(GetPositionMiddleRight(weapon->GetSprite(), PlayerEntity.GetSprite()));
 }
 
@@ -102,8 +101,10 @@ void CLevel::Update(const float& dt)
 	{
 		AiController.UpdateLogic(dt, wave, PlayerEntity);
 	}
-
-	
+	for (CBaseProjectileEntity* playerProjectile : PlayerProjectiles)
+	{
+		ProjectileController.UpdateLogic(dt, *playerProjectile);
+	}
 }
 
 void CLevel::Render(sf::RenderTarget& target)
@@ -117,4 +118,16 @@ void CLevel::Render(sf::RenderTarget& target)
 	{
 		target.draw(wave.GetSprite());
 	}
+	for (auto& projectile : PlayerProjectiles)
+	{
+		std::cout << projectile->GetSprite().getPosition().x << std::endl;
+		target.draw(projectile->GetSprite());
+	}
+}
+
+void CLevel::SpawnProjectile(CEntity& entity) {
+	CBaseProjectileEntity* projectile = new CBaseProjectileEntity("BASE_PROJECTILE", sf::Sprite(CTextureDictionary::GetTexture("BASE_PROJECTILE")));
+	projectile->GetSprite().setPosition(GetPositionMiddleRight(projectile->GetSprite(), entity.GetSprite()));
+	PlayerProjectiles.push_back(projectile);
+
 }
