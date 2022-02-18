@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -29,13 +29,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -142,23 +142,48 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AiController.cpp" />
+    <ClCompile Include="AiEntity.cpp" />
+    <ClCompile Include="BaseProjectileController.cpp" />
+    <ClCompile Include="BaseProjectileEntity.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
+    <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
-    <ClCompile Include="MainMenuState.cpp" />
-    <ClCompile Include="State.cpp" />
+    <ClCompile Include="MovementComponent.cpp" />
+    <ClCompile Include="PlayerEntity.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="TextureDictionary.cpp" />
+    <ClCompile Include="BaseWeaponEntity.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AiController.h" />
+    <ClInclude Include="AiEntity.h" />
+    <ClInclude Include="BaseProjectileController.h" />
+    <ClInclude Include="BaseProjectileEntity.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Common.h" />
+    <ClInclude Include="Controller.h" />
+    <ClInclude Include="PauseMenu.h" />
+    <ClInclude Include="MathUtils.h" />
+    <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameState.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="MainMenu.h" />
-    <ClInclude Include="MainMenuState.h" />
-    <ClInclude Include="State.h" />
+    <ClInclude Include="MovementComponent.h" />
+    <ClInclude Include="PlayerEntity.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="TextureDictionary.h" />
+    <ClInclude Include="BaseWeaponEntity.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Shooter.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

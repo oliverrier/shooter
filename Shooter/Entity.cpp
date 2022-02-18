@@ -1,27 +1,84 @@
-#include "Entity.h"
+#include "BaseWeaponEntity.h"
+#include <iostream>
 
-Entity::Entity()
-{
-	this->shape.setSize(sf::Vector2f(50.f, 50.f));
-	this->shape.setFillColor(sf::Color::White);
-	this->movementSpeed = 100.f;
-}
-
-Entity::~Entity()
+CEntity::CEntity(const char* name, sf::Sprite sprite): Name(name), Sprite(sprite), ParentEntity(nullptr)
 {
 }
 
-void Entity::move(const float dt, const float dirX, const float dirY)
+CEntity::~CEntity()
 {
-	this->shape.move(dirX * this->movementSpeed * dt, dirY *  this->movementSpeed * dt);
+	if (ParentEntity != nullptr)
+	{
+		DetachFromParentEntity();
+	}
+	ChildEntities.clear();
 }
 
-void Entity::update(const float& dt)
-{
 
+sf::Sprite& CEntity::GetSprite()
+{
+	return Sprite;
 }
 
-void Entity::render(sf::RenderTarget* target)
+CEntity* CEntity::GetChildEntity(const char* name) 
 {
-	target->draw(this->shape);
+	return ChildEntities[name];
 }
+
+std::map<const char*, CEntity*>& CEntity::GetChildEntities()
+{
+	return ChildEntities;
+}
+
+const char* CEntity::GetName() {
+	return Name;
+}
+
+
+void CEntity::SetParentEntity(CEntity* parentEntity)
+{
+	ParentEntity = parentEntity;
+	parentEntity->ChildEntities[Name] = this;
+}
+
+
+void CEntity::SetChildEntity(CEntity* childEntity)
+{
+	childEntity->SetParentEntity(this);
+}
+
+void CEntity::DetachFromParentEntity()
+{
+	auto removed = ParentEntity->ChildEntities.erase(Name);
+	std::cout << "removed : " << removed << std::endl;
+	ParentEntity = nullptr;
+}
+
+void CEntity::DetachChildEntity(const char* childKey)
+{
+	ChildEntities[childKey]->DetachFromParentEntity();
+}
+
+void CEntity::DetachChildEntities()
+{
+	for (auto& child : ChildEntities)
+	{
+		child.second->DetachFromParentEntity();
+	}
+}
+
+void CEntity::Render(sf::RenderTarget& target)
+{
+	target.draw(Sprite);
+	for (auto& child : ChildEntities)
+	{
+		if (child.second != nullptr)
+		{
+			child.second->Render(target);
+		}
+			
+
+	}
+}
+
+

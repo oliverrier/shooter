@@ -1,31 +1,37 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <iostream>
-#include<stack>
-#include<vector>
-#include<map>
+#include "MathUtils.h"
 
-//SFML
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
- 
-class Entity
+
+class CEntity
 {
-private:
 protected:
-	sf::RectangleShape shape;
-	float movementSpeed;
+	const char* Name;
+	sf::Sprite Sprite;
+	CEntity* ParentEntity;
+	std::map<const char*, CEntity*> ChildEntities;
+
 
 public:
-	Entity();
-	virtual ~Entity();
+	CEntity(const char* name, sf::Sprite sprite);
+	virtual ~CEntity();
+
+
+	//getter and setters
+	sf::Sprite& GetSprite();
+	CEntity* GetChildEntity(const char* name);
+	std::map<const char*, CEntity*>& GetChildEntities();
+	const char* GetName();
 
 	//Functions
-	virtual void move(const float dt, const float dirX, const float dirY);
+	virtual void SetParentEntity(CEntity* parentEntity);
+	virtual void SetChildEntity(CEntity* childEntity);
+	virtual void DetachFromParentEntity();
+	virtual void DetachChildEntity(const char* childKey);
+	virtual void DetachChildEntities();
 
-	virtual void update(const float& dt);
-	virtual void render(sf::RenderTarget* target);
+	virtual void Render(sf::RenderTarget& target);
 
 };
 

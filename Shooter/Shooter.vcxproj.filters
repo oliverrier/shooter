@@ -13,66 +13,140 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Fichiers sources\menu">
-      <UniqueIdentifier>{2d7781f5-7433-4838-a869-4800b7d13db4}</UniqueIdentifier>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{d04fa205-b524-457c-8543-ad21ffae97f7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\menu">
-      <UniqueIdentifier>{a3734e3e-4240-44c2-b09f-a9e28e1513bc}</UniqueIdentifier>
+    <Filter Include="Components">
+      <UniqueIdentifier>{4d79122d-a425-43e8-9dc9-3c6fec3f4193}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\components">
-      <UniqueIdentifier>{37ce541c-1dd5-489d-8e67-9b8c287e827b}</UniqueIdentifier>
+    <Filter Include="Controllers">
+      <UniqueIdentifier>{655415cf-3c49-41c3-b402-6d903bc1259e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\components">
-      <UniqueIdentifier>{0412c4d5-4220-48c3-b92c-1da4923a3a18}</UniqueIdentifier>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{b888382c-c8f3-4fdd-94ce-72fc12ec2bf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{024cefb8-6941-4587-949f-fa18e78f6afd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenu.cpp">
-      <Filter>Fichiers sources\menu</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Fichiers sources\components</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="Level.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenuState.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="Button.cpp">
+      <Filter>Fichiers de ressources</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureDictionary.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="AiController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="AiEntity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseWeaponEntity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseProjectileController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseProjectileEntity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerEntity.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
     <ClInclude Include="MainMenu.h">
-      <Filter>Fichiers d%27en-tête\menu</Filter>
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
-      <Filter>Fichiers d%27en-tête\components</Filter>
+      <Filter>Fichiers de ressources</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementComponent.h">
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="Controller.h">
+      <Filter>Controllers</Filter>
     </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Controllers</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="TextureDictionary.h">
+      <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="MainMenuState.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="Common.h">
+      <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="MathUtils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseMenu.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="AiController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="AiEntity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseWeaponEntity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseProjectileController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseProjectileEntity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerEntity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Shooter.rc">
+      <Filter>Fichiers de ressources</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

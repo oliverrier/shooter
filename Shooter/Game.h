@@ -2,50 +2,50 @@
 #define GAME_H
 
 
-#include "MainMenuState.h"
+#include "MainMenu.h"
 
 
 
-class Game
+class CGame
 {
 
 private:
 	// variables 
-	sf::VideoMode desktopMode;
-	sf::RenderWindow* window;
+	sf::VideoMode DesktopMode;
+	sf::RenderWindow& Window;
 
-	sf::Event sfEvent;
+	sf::Event SfEvent;
 
-	sf::Clock deltaTimeClock;
-	float deltaTime;
+	sf::Clock DeltaTimeClock;
+	float DeltaTime;
 
-	std::stack<State*> states;
+	std::stack<CScene*> Scenes;
 		
 	// functions
-	void initWindow();
-	void initStates();
+	void InitWindow();
+	void InitStates();
 
 public:
 	// constructors - destructor
-	Game();
-	~Game();
+	CGame();
+	~CGame();
 
 	// functions
 
 	//regumar
-	void endApplication();
+	void EndApplication();
 
 
 	//update
-	void updateDeltaTime();
-	void updateSFMLEvents();
-	void update();
+	void UpdateDeltaTime();
+	void UpdateSFMLEvents();
+	void Update();
 
 	//render
-	void render();
+	void Render();
 
 	//core
-	void run();
+	void Run();
 
 };
 
