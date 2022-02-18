@@ -6,6 +6,7 @@ CLevel::CLevel(sf::RenderWindow& window, std::stack<CScene*>& states) : CScene(w
 PlayerEntity(CEntity("PLAYER", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BASE_IDLE")))),
 PlayerController(CPlayerController(Window, 250)),
 ProjectileController(CBaseProjectileController(500)),
+AiController(CAiController(Window, 250)),
 MovementComponent(CMovementComponent(100.f))
 {
 	InitBackgrounds();

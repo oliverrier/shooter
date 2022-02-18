@@ -1,8 +1,10 @@
 #ifndef STATE_H
 #define STATE_H
 
+#include<stack>
+#include "TextureDictionary.h"
 
-#include "AiEntity.h"
+
 class CScene
 {
 
