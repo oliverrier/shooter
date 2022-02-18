@@ -1,11 +1,10 @@
 #include "Level.h"
-#include "PlayerController.h"
-#include "MovementComponent.h"
 #include "PauseMenu.h"
 
 CLevel::CLevel(sf::RenderWindow& window, std::stack<CScene*>& states) : CScene(window, states),
 PlayerEntity(CEntity("PLAYER", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BASE_IDLE")))),
 PlayerController(CPlayerController(Window, 250)),
+AiController(CAiController(Window, 250)),
 MovementComponent(CMovementComponent(100.f))
 {
 	InitBackgrounds();
