@@ -3,7 +3,9 @@
 
 
 #include "Scene.h"
-
+#include "AiEntity.h"
+#include "PlayerController.h"
+#include "AiController.h"
 
 class CLevel : public CScene
 {
@@ -13,6 +15,7 @@ private:
 
     CEntity PlayerEntity;
     CPlayerController PlayerController;
+    CAiController AiController;
     sf::RectangleShape Backgrounds[2];
     CMovementComponent MovementComponent;
     std::vector<std::vector<CAiEntity>> Waves;

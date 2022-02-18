@@ -3,7 +3,7 @@
 
 #include "Controller.h"
 
-
+class CAiEntity;
 
 class CAiController :
 	public CController
@@ -13,7 +13,7 @@ public:
 
 
 	//functions
-	void UpdateLogic(const float& dt, CEntity& entity);
+	void UpdateLogic(const float& dt, CAiEntity& entity);
 };
 
 #endif

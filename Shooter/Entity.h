@@ -1,7 +1,9 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "PlayerController.h"
+#include "MathUtils.h"
+
+
 class CEntity
 {
 protected:

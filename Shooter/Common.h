@@ -1,7 +1,6 @@
 #pragma once
 
 #include<iostream>
-#include<stack>
 #include<map>
 #include "MathUtils.h"
 
