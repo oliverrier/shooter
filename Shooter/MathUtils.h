@@ -25,3 +25,6 @@ inline sf::Vector2f Normalized(const sf::Vector2f& vector2D)
     return vector2D / norm;
 }
 
+inline int getRandomInt (int min, int max) {
+    return rand() % (max - min + 1) + min;
+}

@@ -142,6 +142,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AiController.cpp" />
+    <ClCompile Include="AiEntity.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
@@ -156,11 +158,13 @@
     <ClCompile Include="TextureDictionary.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AiController.h" />
+    <ClInclude Include="AiEntity.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="PauseMenu.h" />
-    <ClInclude Include="VectorMath.h" />
+    <ClInclude Include="MathUtils.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />

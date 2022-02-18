@@ -66,6 +66,12 @@
     <ClCompile Include="PauseMenu.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="AiController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="AiEntity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -101,11 +107,17 @@
     <ClInclude Include="Common.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="VectorMath.h">
+    <ClInclude Include="MathUtils.h">
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="PauseMenu.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="AiController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="AiEntity.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

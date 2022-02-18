@@ -4,6 +4,7 @@
 
 #include "Scene.h"
 
+
 class CLevel : public CScene
 {
 
@@ -14,10 +15,13 @@ private:
     CPlayerController PlayerController;
     sf::RectangleShape Backgrounds[2];
     CMovementComponent MovementComponent;
+    std::vector<std::vector<CAiEntity>> Waves;
+    int CurrentWave = 0;
 
     //functions
     void InitMusic();
     void InitBackgrounds();
+    void InitWaves();
 
 public:
     CLevel(sf::RenderWindow& window, std::stack<CScene*>& states);

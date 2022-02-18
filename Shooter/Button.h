@@ -1,13 +1,7 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include <iostream>
-#include<stack>
-#include<vector>
-//#include<map>
-
 //SFML
-#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
 enum button_states{BTN_IDLE = 0, BTN_HOVER, BTN_ACTIVE};

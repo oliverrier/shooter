@@ -10,7 +10,7 @@ MovementComponent(CMovementComponent(100.f))
 {
 	InitBackgrounds();
 	InitMusic();
-
+	InitWaves();
 	PlayerEntity.GetSprite().setScale({ 0.5, 0.5 });
 }
 
@@ -35,6 +35,11 @@ void CLevel::InitBackgrounds()
 	}
 	Backgrounds[0].setPosition({ 0.f, 0.f });
 	Backgrounds[1].setPosition({ (float)Window.getSize().x, 0.f });
+}
+
+void CLevel::InitWaves()
+{
+	Waves.push_back(std::vector<CAiEntity>{ CAiEntity("AiTest", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_SLIME"))) });
 }
 
 
@@ -68,6 +73,8 @@ void CLevel::Update(const float& dt)
 	UpdateBackground(dt);
 
 	PlayerController.UpdateLogic(dt, PlayerEntity);
+
+	
 }
 
 void CLevel::Render(sf::RenderTarget& target)
@@ -77,4 +84,8 @@ void CLevel::Render(sf::RenderTarget& target)
 		target.draw(background);
 	}
 	PlayerEntity.Render(target);
+	for (auto& wave : Waves[CurrentWave])
+	{
+		target.draw(wave.GetSprite());
+	}
 }
