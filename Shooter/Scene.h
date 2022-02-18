@@ -2,7 +2,7 @@
 #define STATE_H
 
 
-#include "Entity.h"
+#include "AiEntity.h"
 class CScene
 {
 

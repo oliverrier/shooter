@@ -12,7 +12,7 @@ protected:
 
 
 public:
-	CEntity(const char* Name, sf::Sprite sprite);
+	CEntity(const char* name, sf::Sprite sprite);
 	virtual ~CEntity();
 
 
