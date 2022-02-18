@@ -22,8 +22,19 @@ void CPlayerController::UpdateLogic(const float& dt, CPlayerEntity& player)
 		--directionY;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && globalBounds.top + globalBounds.height < viewport.top + viewport.height)
 		++directionY;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && player.GetChildEntities()["SOLAR_WEAPON"] != nullptr)
+
+	if (!canShoot) {
+		delayToShootAgain += dt;
+		if (delayToShootAgain > 0.5f) {
+			canShoot = true;
+			delayToShootAgain = 0.f;
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && player.GetChildEntities()["SOLAR_WEAPON"] != nullptr && canShoot) {
 		player.GetCurrentLevel().SpawnProjectile(player);
+		canShoot = false;
+	}
 
 	Move(dt, player.GetSprite(), directionX, directionY);
 

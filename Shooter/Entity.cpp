@@ -50,7 +50,6 @@ void CEntity::SetChildEntity(CEntity* childEntity)
 void CEntity::DetachFromParentEntity()
 {
 	auto removed = ParentEntity->ChildEntities.erase(Name);
-	std::cout << "removed : " << removed << std::endl;
 	ParentEntity = nullptr;
 }
 

@@ -11,6 +11,8 @@ class CPlayerController :
 {
 protected:
 	sf::RenderWindow& Window;
+	bool canShoot = true;
+	float delayToShootAgain = 0.f;
 
 public:
 	CPlayerController(sf::RenderWindow& window, float maxVelocity);

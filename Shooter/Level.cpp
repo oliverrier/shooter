@@ -101,9 +101,10 @@ void CLevel::Update(const float& dt)
 	{
 		AiController.UpdateLogic(dt, wave, PlayerEntity);
 	}
-	for (CBaseProjectileEntity* playerProjectile : PlayerProjectiles)
+
+	for (int i = 0; i < PlayerProjectiles.size(); i++)
 	{
-		ProjectileController.UpdateLogic(dt, *playerProjectile);
+		ProjectileController.UpdateLogic(dt, PlayerProjectiles[i], Waves[CurrentWave], PlayerProjectiles, i);
 	}
 }
 
@@ -120,8 +121,9 @@ void CLevel::Render(sf::RenderTarget& target)
 	}
 	for (auto& projectile : PlayerProjectiles)
 	{
-		std::cout << projectile->GetSprite().getPosition().x << std::endl;
-		target.draw(projectile->GetSprite());
+		if (projectile != nullptr) {
+			target.draw(projectile->GetSprite());
+		}
 	}
 }
 

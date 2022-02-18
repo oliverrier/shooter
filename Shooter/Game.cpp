@@ -89,7 +89,7 @@ void CGame::Run() {
 	while (Window.isOpen()) {
 		UpdateDeltaTime();
 		Update();
-		Render();
+ 		Render();
 	 }
 }
 
