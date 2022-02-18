@@ -26,6 +26,11 @@ void CMovementComponent::Move(const float& dt, sf::Shape& shape, const float dir
 	shape.move(Normalized(Velocity) * MaxVelocity * dt);
 }
 
+void CMovementComponent::SetRotation(sf::Sprite& sprite, const float degrees)
+{
+	sprite.setRotation(degrees);
+}
+
 void CMovementComponent::Update(const float& dt)
 {
 }
