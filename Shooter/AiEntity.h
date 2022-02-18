@@ -11,6 +11,7 @@ public:
 
     const sf::Vector2f& GetDestination();
     void SetDestination(sf::Vector2f newDestination);
+    void SetRandomDestination(sf::RenderWindow& Window);
 
 };
 

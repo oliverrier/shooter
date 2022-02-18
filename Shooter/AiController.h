@@ -13,7 +13,7 @@ public:
 
 
 	//functions
-	void UpdateLogic(const float& dt, CAiEntity& entity);
+	void UpdateLogic(const float& dt, CAiEntity& entity, CEntity& targetEntity);
 };
 
 #endif

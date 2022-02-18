@@ -24,6 +24,10 @@ public:
 	//functions
 	void Move(const float& dt, sf::Sprite& sprite, const float directionX, const float directionY);
 	void Move(const float& dt, sf::Shape& shape,const float directionX, const float directionY );
+
+	void SetRotation(sf::Sprite& sprite, const float degrees);
+
+
 	void Update(const float& dt);
 };
 

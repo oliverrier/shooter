@@ -6,7 +6,7 @@ CLevel::CLevel(sf::RenderWindow& window, std::stack<CScene*>& states) : CScene(w
 PlayerEntity(CEntity("PLAYER", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BASE_IDLE")))),
 PlayerController(CPlayerController(Window, 250)),
 ProjectileController(CBaseProjectileController(500)),
-AiController(CAiController(Window, 250)),
+AiController(CAiController(Window, 150)),
 MovementComponent(CMovementComponent(100.f))
 {
 	InitBackgrounds();
@@ -44,7 +44,26 @@ void CLevel::InitBackgrounds()
 
 void CLevel::InitWaves()
 {
-	Waves.push_back(std::vector<CAiEntity>{ CAiEntity("AiTest", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_SLIME"))) });
+	Waves.push_back(std::vector<CAiEntity>{ 
+		CAiEntity("AiSlime", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_SLIME"))),
+		CAiEntity("AiRed", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_RED"))),
+		CAiEntity("AiGreen", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_GREEN"))),
+	});
+	Waves.push_back(std::vector<CAiEntity>{
+		CAiEntity("AiPurple", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_PURPLE"))),
+		CAiEntity("AiPink", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_PINK"))),
+		CAiEntity("AiDark", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_DARK"))),
+		CAiEntity("AiBlack", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BLACK"))),
+	});
+	Waves.push_back(std::vector<CAiEntity>{
+		CAiEntity("AiSlime2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_SLIME"))),
+		CAiEntity("AiRed2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_RED"))),
+		CAiEntity("AiGreen2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_GREEN"))),
+		CAiEntity("AiPurple2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_PURPLE"))),
+		CAiEntity("AiPink2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_PINK"))),
+		CAiEntity("AiDark2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_DARK"))),
+		CAiEntity("AiBlack2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BLACK"))),
+	});
 }
 
 
@@ -78,13 +97,13 @@ void CLevel::Update(const float& dt)
 	UpdateBackground(dt);
 
 	PlayerController.UpdateLogic(dt, PlayerEntity);
-	// CBaseProjectileEntity* projectile = PlayerEntity.GetChildEntities["BASE_PROJECTILE"];
-	// if(projectile != nullptr)
-	//	PlayerProjectiles.push_back(projectile);
-	// for (auto& projectile : PlayerProjectiles)
-	// {
-	//	ProjectileController.UpdateLogic(dt, projectile);
-	// }
+
+	for (auto& wave : Waves[CurrentWave])
+	{
+		AiController.UpdateLogic(dt, wave, PlayerEntity);
+	}
+
+	
 }
 
 void CLevel::Render(sf::RenderTarget& target)
