@@ -11,6 +11,11 @@ MovementComponent(CMovementComponent(100.f))
 	InitMusic();
 	InitWaves();
 	PlayerEntity.GetSprite().setScale({ 0.5, 0.5 });
+
+	Text.setFont(font);
+	Text.setString(text);
+	Text.setFillColor(sf::Color::White);
+	Text.setCharacterSize(20);
 }
 
 CLevel::~CLevel()

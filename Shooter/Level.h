@@ -13,6 +13,8 @@ class CLevel : public CScene
 private:
     sf::Music Music;
 
+    sf::Text Text;
+
     CEntity PlayerEntity;
     CPlayerController PlayerController;
     CAiController AiController;
