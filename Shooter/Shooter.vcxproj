@@ -42,13 +42,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -144,6 +144,8 @@
   <ItemGroup>
     <ClCompile Include="AiController.cpp" />
     <ClCompile Include="AiEntity.cpp" />
+    <ClCompile Include="BaseProjectileController.cpp" />
+    <ClCompile Include="BaseProjectileEntity.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
@@ -156,10 +158,13 @@
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="TextureDictionary.cpp" />
+    <ClCompile Include="BaseWeaponEntity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AiController.h" />
     <ClInclude Include="AiEntity.h" />
+    <ClInclude Include="BaseProjectileController.h" />
+    <ClInclude Include="BaseProjectileEntity.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Controller.h" />
@@ -173,6 +178,7 @@
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="TextureDictionary.h" />
+    <ClInclude Include="BaseWeaponEntity.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Shooter.rc" />

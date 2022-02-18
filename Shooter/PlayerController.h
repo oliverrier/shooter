@@ -3,13 +3,14 @@
 
 #include "Controller.h"
 
-
-
 class CPlayerController :
-    public CController
+	public CController
+
 {
 public:
 	CPlayerController(sf::RenderWindow& window, float maxVelocity);
+	sf::RenderWindow& Window;
+
 
 
 	//functions

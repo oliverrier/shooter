@@ -1,4 +1,4 @@
-#ifndef GAMESTATE_H
+ #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
 
@@ -12,11 +12,13 @@ private:
     sf::Music Music;
 
     CEntity PlayerEntity;
-    CPlayerController PlayerController;
+	CPlayerController PlayerController;
+	CBaseProjectileController ProjectileController;
     sf::RectangleShape Backgrounds[2];
     CMovementComponent MovementComponent;
     std::vector<std::vector<CAiEntity>> Waves;
     int CurrentWave = 0;
+	std::vector<CBaseProjectileEntity*> PlayerProjectiles;
 
     //functions
     void InitMusic();

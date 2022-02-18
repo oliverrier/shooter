@@ -1,17 +1,21 @@
 #include "Level.h"
-#include "PlayerController.h"
-#include "MovementComponent.h"
 #include "PauseMenu.h"
+#include "BaseWeaponEntity.h"
 
 CLevel::CLevel(sf::RenderWindow& window, std::stack<CScene*>& states) : CScene(window, states),
 PlayerEntity(CEntity("PLAYER", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BASE_IDLE")))),
 PlayerController(CPlayerController(Window, 250)),
+ProjectileController(CBaseProjectileController(500)),
 MovementComponent(CMovementComponent(100.f))
 {
 	InitBackgrounds();
 	InitMusic();
 	InitWaves();
-	PlayerEntity.GetSprite().setScale({ 0.5, 0.5 });
+	PlayerEntity.GetSprite().setScale({ 0.25, 0.25 });
+	CBaseWeaponEntity* weapon = new CBaseWeaponEntity("SOLAR_WEAPON", sf::Sprite(CTextureDictionary::GetTexture("SOLAR_WEAPON")));
+	PlayerEntity.SetChildEntity(weapon);
+	weapon->GetSprite().setScale({ 0.40, 0.40 });
+	weapon->GetSprite().setPosition(GetPositionMiddleRight(weapon->GetSprite(), PlayerEntity.GetSprite()));
 }
 
 CLevel::~CLevel()
@@ -73,8 +77,13 @@ void CLevel::Update(const float& dt)
 	UpdateBackground(dt);
 
 	PlayerController.UpdateLogic(dt, PlayerEntity);
-
-	
+	// CBaseProjectileEntity* projectile = PlayerEntity.GetChildEntities["BASE_PROJECTILE"];
+	// if(projectile != nullptr)
+	//	PlayerProjectiles.push_back(projectile);
+	// for (auto& projectile : PlayerProjectiles)
+	// {
+	//	ProjectileController.UpdateLogic(dt, projectile);
+	// }
 }
 
 void CLevel::Render(sf::RenderTarget& target)

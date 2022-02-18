@@ -1,4 +1,4 @@
-#include "Entity.h"
+#include "BaseWeaponEntity.h"
 
 CEntity::CEntity(const char* name, sf::Sprite sprite): Name(name), Sprite(sprite), ParentEntity(nullptr)
 {
@@ -59,6 +59,10 @@ void CEntity::DetachChildEntities()
 void CEntity::Render(sf::RenderTarget& target)
 {
 	target.draw(Sprite);
+	for (auto& child : ChildEntities)
+	{
+		child.second->Render(target);
+	}
 }
 
 

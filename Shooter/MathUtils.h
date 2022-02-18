@@ -28,3 +28,7 @@ inline sf::Vector2f Normalized(const sf::Vector2f& vector2D)
 inline int getRandomInt (int min, int max) {
     return rand() % (max - min + 1) + min;
 }
+inline sf::Vector2f GetPositionMiddleRight(sf::Sprite childSprite, sf::Sprite parentSprite) {
+	return { parentSprite.getPosition().x + parentSprite.getGlobalBounds().width, parentSprite.getPosition().y + parentSprite.getGlobalBounds().height / 2.f - childSprite.getGlobalBounds().height / 2.f };
+}
+

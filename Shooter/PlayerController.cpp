@@ -1,7 +1,7 @@
 #include "PlayerController.h"
-#include "Entity.h"
+#include "BaseWeaponEntity.h"
 
-CPlayerController::CPlayerController(sf::RenderWindow& window, float maxVelocity):CController(window, maxVelocity)
+CPlayerController::CPlayerController(sf::RenderWindow& window, float maxVelocity):CController(maxVelocity), Window(window)
 {
 }
 
@@ -20,11 +20,14 @@ void CPlayerController::UpdateLogic(const float& dt, CEntity& entity)
 		--directionY;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && globalBounds.top + globalBounds.height < viewport.top + viewport.height)
 		++directionY;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && entity.GetChildEntities()["SOLAR_WEAPON"] != nullptr)
+		((CBaseWeaponEntity*)entity.GetChildEntities()["SOLAR_WEAPON"])->Use();
 
 	Move(dt, entity.GetSprite(), directionX, directionY);
 
 	for (auto& child : entity.GetChildEntities())
 	{
-		Move(dt, child.second->GetSprite(), directionX, directionY);
+		if(std::string(child.first).find("_PROJECTILE") == std::string::npos)
+			Move(dt, child.second->GetSprite(), directionX, directionY);
 	}
 }

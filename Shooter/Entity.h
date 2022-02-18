@@ -2,6 +2,7 @@
 #define ENTITY_H
 
 #include "PlayerController.h"
+#include "BaseProjectileController.h"
 class CEntity
 {
 protected:

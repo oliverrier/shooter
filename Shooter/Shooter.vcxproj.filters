@@ -72,6 +72,15 @@
     <ClCompile Include="AiEntity.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="BaseWeaponEntity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseProjectileController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseProjectileEntity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -117,6 +126,15 @@
       <Filter>Controllers</Filter>
     </ClInclude>
     <ClInclude Include="AiEntity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseWeaponEntity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseProjectileController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseProjectileEntity.h">
       <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>

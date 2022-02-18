@@ -11,10 +11,9 @@ class CController
 {
 protected:
 	CMovementComponent& MovementComponent;
-	sf::RenderWindow& Window;
 
 public:
-	CController(sf::RenderWindow& window, float maxVelocity);
+	CController(float maxVelocity);
 	virtual ~CController();
 
 
