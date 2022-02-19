@@ -1,7 +1,7 @@
 #include "AiEntity.h"
 
 
-CAiEntity::CAiEntity(const char* name, sf::Sprite sprite, CLevel& currentLevel) :CPlayerEntity(name, sprite, currentLevel), MaxDelayToShootAgain(getRandomInt(1,5))
+CAiEntity::CAiEntity(const char* name, sf::Sprite sprite, CLevel& currentLevel) :CPlayerEntity(name, sprite, currentLevel), MaxDelayToShootAgain((float)getRandomInt(1,5))
 {
 	MaxLife = 5;
 	CurrentLife = 5;

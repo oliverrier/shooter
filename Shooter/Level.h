@@ -44,10 +44,12 @@ public:
 
     virtual void UpdateInput(const float& dt);
     void UpdateBackground(const float& dt);
+    void UpdateControllers(const float& dt);
 
     void Update(const float& dt);
-    void Render(sf::RenderTarget& target);
 	void SpawnProjectile(CEntity& entity, sf::Vector2f direction, sf::Color color);
+    void FinishGame(const char* string, sf::Color color);
+    void Render(sf::RenderTarget& target);
 };
 
 #endif

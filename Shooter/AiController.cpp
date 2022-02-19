@@ -8,6 +8,32 @@ CAiController::CAiController(sf::RenderWindow& window, float maxVelocity): CCont
 
 
 
+void CAiController::UpdateDelayCanShoot(const float dt, CAiEntity& entity)
+{
+	entity.SetDelayToShootAgain(entity.GetDelayToShootAgain() + dt);
+	if (entity.GetDelayToShootAgain() > entity.GetMaxDelayToShootAgain()) {
+		entity.SetCanShoot(true);
+		entity.SetDelayToShootAgain(0.f);
+		entity.SetMaxDelayToShootAgain((float)getRandomInt(1, 5));
+	}
+}
+
+void CAiController::UpdateShootSystem(const float dt, CAiEntity& entity, CEntity& targetEntity)
+{
+	const sf::Vector2f entityPosition = entity.GetSprite().getPosition();
+	const sf::Vector2f targetEntityPosition = targetEntity.GetSprite().getPosition();
+	sf::Vector2f directionToTargetEntity = GetDirection(entityPosition, targetEntityPosition);
+
+	if (!entity.GetCanShoot()) {
+		UpdateDelayCanShoot(dt, entity);
+	}
+
+	if (entity.GetCanShoot()) {
+		entity.GetCurrentLevel().SpawnProjectile(entity, Normalized(directionToTargetEntity), sf::Color::Red);
+		entity.SetCanShoot(false);
+	}
+}
+
 void CAiController::UpdateLogic(const float& dt, CAiEntity& entity, CEntity& targetEntity)
 {
 	const sf::Vector2f entityPosition = entity.GetSprite().getPosition();
@@ -28,19 +54,6 @@ void CAiController::UpdateLogic(const float& dt, CAiEntity& entity, CEntity& tar
 		const float angle = GetAngleBetweenVector(directionToTargetEntity, entityPosition);
 		SetRotation(entity.GetSprite(), angle);
 	}
-
-	if (!entity.GetCanShoot()) {
-		entity.SetDelayToShootAgain(entity.GetDelayToShootAgain() + dt);
-		if (entity.GetDelayToShootAgain() > entity.GetMaxDelayToShootAgain()) {
-			entity.SetCanShoot(true);
-			entity.SetDelayToShootAgain(0.f);
-			entity.SetMaxDelayToShootAgain((float)getRandomInt(1,5));
-		}
-	}
-
-	if (entity.GetCanShoot()) {
-		entity.GetCurrentLevel().SpawnProjectile(entity, Normalized(directionToTargetEntity), sf::Color::Red);
-		entity.SetCanShoot(false);
-	}
-
+	
+	UpdateShootSystem(dt, entity, targetEntity);
 }

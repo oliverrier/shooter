@@ -99,22 +99,8 @@ void CLevel::UpdateBackground(const float& dt)
 
 }
 
-void CLevel::Update(const float& dt)
+void CLevel::UpdateControllers(const float& dt)
 {
-	if (IsEnd)
-	{
-		DelayToEndGame += dt;
-		if (DelayToEndGame >= 3)
-		{
-			SetNumberOfTopScenesToDelete(1);
-		}
-		return;
-	}
-
-	UpdateMousePosition();
-	UpdateInput(dt);
-	UpdateBackground(dt);
-
 	PlayerController.UpdateLogic(dt, PlayerEntity);
 
 	for (int i = 0; i < Waves[CurrentWave].size(); i++)
@@ -139,37 +125,69 @@ void CLevel::Update(const float& dt)
 	{
 		ProjectileController.UpdateLogic(dt, PlayerProjectiles[i], Waves[CurrentWave], PlayerEntity, PlayerProjectiles, i);
 	}
+}
+
+void CLevel::Update(const float& dt)
+{
+	if (IsEnd)
+	{
+		DelayToEndGame += dt;
+		if (DelayToEndGame >= 3)
+		{
+			SetNumberOfTopScenesToDelete(1);
+		}
+		return;
+	}
+
+	UpdateMousePosition();
+	UpdateInput(dt);
+	UpdateBackground(dt);
+	UpdateControllers(dt);
 
 	TextLife.setString(to_string(PlayerEntity.GetCurrentLife()) + "/" + to_string(PlayerEntity.GetMaxLife()) + "pv");
 
 	if (PlayerEntity.GetCurrentLife() <= 0)
 	{
-		TextEnd.setFillColor(sf::Color::Red);
-		TextEnd.setString("DEFAITE");
-		const sf::FloatRect viewport = (sf::FloatRect)Window.getViewport(Window.getView());
-		const auto textEndGlobalBound = TextEnd.getGlobalBounds();
-		const float centerXOfWindow = viewport.width / 2.f - textEndGlobalBound.width / 2;
-		const float centerYOfWindow = viewport.height / 2.f - textEndGlobalBound.height;
-		TextEnd.setPosition({ centerXOfWindow, centerYOfWindow });
-		IsEnd = true;
+		FinishGame("DEFAITE", sf::Color::Red);
 	}
 
 	if (Waves[CurrentWave].size() == 0)
 	{
 		if (++CurrentWave > Waves.size() - 1)
 		{
-			TextEnd.setFillColor(sf::Color::Green);
-			TextEnd.setString("Victoire");
-			const sf::FloatRect viewport = (sf::FloatRect)Window.getViewport(Window.getView());
-			const auto textEndGlobalBound = TextEnd.getGlobalBounds();
-			const float centerXOfWindow = viewport.width / 2.f - textEndGlobalBound.width / 2;
-			const float centerYOfWindow = viewport.height / 2.f - textEndGlobalBound.height;
-			TextEnd.setPosition({ centerXOfWindow, centerYOfWindow });
-			IsEnd = true;
+		    FinishGame("VICTOIRE", sf::Color::Green);
 		}
 	}
 
 }
+
+void CLevel::SpawnProjectile(CEntity& entity, sf::Vector2f direction, sf::Color color) {
+	CBaseProjectileEntity* projectile = new CBaseProjectileEntity("BASE_PROJECTILE", sf::Sprite(CTextureDictionary::GetTexture("BASE_PROJECTILE")), direction);
+	projectile->GetSprite().setColor(color);
+	projectile->GetSprite().setPosition(GetPositionMiddleRight(projectile->GetSprite(), entity.GetSprite()));
+
+	const sf::Vector2f projectilePosition = projectile->GetSprite().getPosition();
+	if (color == sf::Color::Red && (projectilePosition.x != 0.f || projectilePosition.y != 0.f) && (direction.x != 0.f || direction.y != 0.f)) {
+		const float angle = GetAngleBetweenVector(direction, projectilePosition);
+		projectile->GetSprite().setRotation(angle);
+	}
+
+	PlayerProjectiles.push_back(projectile);
+
+}
+
+void CLevel::FinishGame(const char* string, sf::Color color)
+{
+	TextEnd.setString(string);
+	TextEnd.setFillColor(color);
+	const sf::FloatRect viewport = (sf::FloatRect)Window.getViewport(Window.getView());
+	const auto textEndGlobalBound = TextEnd.getGlobalBounds();
+	const float centerXOfWindow = viewport.width / 2.f - textEndGlobalBound.width / 2;
+	const float centerYOfWindow = viewport.height / 2.f - textEndGlobalBound.height;
+	TextEnd.setPosition({ centerXOfWindow, centerYOfWindow });
+	IsEnd = true;
+}
+
 
 void CLevel::Render(sf::RenderTarget& target)
 {
@@ -197,20 +215,5 @@ void CLevel::Render(sf::RenderTarget& target)
 	else {
 		target.draw(TextEnd);
 	}
-
-}
-
-void CLevel::SpawnProjectile(CEntity& entity, sf::Vector2f direction, sf::Color color) {
-	CBaseProjectileEntity* projectile = new CBaseProjectileEntity("BASE_PROJECTILE", sf::Sprite(CTextureDictionary::GetTexture("BASE_PROJECTILE")), direction);
-	projectile->GetSprite().setColor(color);
-	projectile->GetSprite().setPosition(GetPositionMiddleRight(projectile->GetSprite(), entity.GetSprite()));
-
-	const sf::Vector2f projectilePosition = projectile->GetSprite().getPosition();
-	if (color == sf::Color::Red && (projectilePosition.x != 0.f || projectilePosition.y != 0.f) && (direction.x != 0.f || direction.y != 0.f)) {
-		const float angle = GetAngleBetweenVector(direction, projectilePosition);
-		projectile->GetSprite().setRotation(angle);
-	}
-
-	PlayerProjectiles.push_back(projectile);
 
 }

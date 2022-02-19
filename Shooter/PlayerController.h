@@ -19,6 +19,9 @@ public:
 
 
 	//functions
+	void MovePlayer(const float dt, CPlayerEntity& player);
+	void UpdateDelayCanShoot(const float dt);
+	void UpdateShootSystem(const float dt, CPlayerEntity& player);
 	void UpdateLogic(const float& dt, CPlayerEntity& entity);
 };
 

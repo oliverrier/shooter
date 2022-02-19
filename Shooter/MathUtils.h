@@ -37,46 +37,36 @@ inline sf::Vector2f Normalized(const sf::Vector2f& vector2D)
 /// <summary>
 /// Return a unnormalized vector perpendicular to the direction
 /// </summary>
-/// <param name="dir"></param>
-/// <returns></returns>
 inline sf::Vector2f Perpendicular(const sf::Vector2f& dir)
 {
     sf::Vector2f perp = sf::Vector2f(dir.y, -dir.x);
     return perp;
 }
 
-inline float RadianToDegree(float r)
+inline float RadianToDegree(float radian)
 {
-    return r * 180.0f / PI;
+    return radian * 180.0f / PI;
 }
-
+/// <summary>
 // Return the oriented angle in degree between 2 segment
 // Positive mean shortest angle is left side
 // negative mean shortest angle is right side
-inline float GetAngleBetweenVector(const sf::Vector2f& s1, const  sf::Vector2f& s2)
+/// </summary>
+inline float GetAngleBetweenVector(const sf::Vector2f& vector1, const  sf::Vector2f& vector2)
 {
-    // Normalize them
-    sf::Vector2f currentSegment = s1 / Length(s1);
-    sf::Vector2f nextSegment = s2 / Length(s2);
+    sf::Vector2f currentSegment = Normalized(vector1);
+    sf::Vector2f nextSegment = Normalized(vector2);
 
-    // Get The Perpendicular to orient the Angle correctly (right or left)
-    sf::Vector2f perpCurrent = Perpendicular(currentSegment);
+    sf::Vector2f perpendicularCurrentSegment = Perpendicular(currentSegment);
 
-    // Angle
     float dot = DotProduct(currentSegment, nextSegment);
     dot = fmaxf(dot, -1.0f);
     dot = fminf(dot, 1.0f);
 
-    // Sign with perpendicular
-    float sign = DotProduct(perpCurrent, nextSegment) >= 0.0f ? 1.0f : -1.0f;
+    float sign = DotProduct(perpendicularCurrentSegment, nextSegment) >= 0.0f ? 1.0f : -1.0f;
 
-    // Convert to degree and orient it with the sign
-    float angle = sign * (RadianToDegree(acosf(dot)) +180);
-
-    return angle;
+    return sign * (RadianToDegree(acosf(dot)) + 180);
 }
-
-
 
 /// <summary>
 /// Return a random int between min and max

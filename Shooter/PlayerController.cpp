@@ -7,10 +7,10 @@ CPlayerController::CPlayerController(sf::RenderWindow& window, float maxVelocity
 {
 }
 
-void CPlayerController::UpdateLogic(const float& dt, CPlayerEntity& player)
+void CPlayerController::MovePlayer(const float dt, CPlayerEntity& player)
 {
 	const sf::FloatRect globalBounds = player.GetSprite().getGlobalBounds();
-	const sf::FloatRect viewport = (sf::FloatRect) Window.getViewport(Window.getView());
+	const sf::FloatRect viewport = (sf::FloatRect)Window.getViewport(Window.getView());
 
 	float directionX = 0.f, directionY = 0.f;
 	//Update player input
@@ -22,25 +22,38 @@ void CPlayerController::UpdateLogic(const float& dt, CPlayerEntity& player)
 		--directionY;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && globalBounds.top + globalBounds.height < viewport.top + viewport.height)
 		++directionY;
+	Move(dt, player.GetSprite(), directionX, directionY);
 
+	for (auto& child : player.GetChildEntities())
+	{
+		if (child.second != nullptr)
+			Move(dt, child.second->GetSprite(), directionX, directionY);
+	}
+}
+
+void CPlayerController::UpdateDelayCanShoot(const float dt)
+{
+	delayToShootAgain += dt;
+	if (delayToShootAgain > 0.5f) {
+		canShoot = true;
+		delayToShootAgain = 0.f;
+	}
+}
+
+void CPlayerController::UpdateShootSystem(const float dt, CPlayerEntity& player)
+{
 	if (!canShoot) {
-		delayToShootAgain += dt;
-		if (delayToShootAgain > 0.5f) {
-			canShoot = true;
-			delayToShootAgain = 0.f;
-		}
+		UpdateDelayCanShoot(dt);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && player.GetChildEntities()["SOLAR_WEAPON"] != nullptr && canShoot) {
 		player.GetCurrentLevel().SpawnProjectile(player, { 1.f, 0.f }, sf::Color::Cyan);
 		canShoot = false;
 	}
+}
 
-	Move(dt, player.GetSprite(), directionX, directionY);
-
-	for (auto& child : player.GetChildEntities())
-	{
-		if(child.second != nullptr)
-			Move(dt, child.second->GetSprite(), directionX, directionY);
-	}
+void CPlayerController::UpdateLogic(const float& dt, CPlayerEntity& player)
+{
+	MovePlayer(dt, player);
+	UpdateShootSystem(dt, player);
 }
