@@ -71,7 +71,7 @@ inline float GetAngleBetweenVector(const sf::Vector2f& s1, const  sf::Vector2f& 
     float sign = DotProduct(perpCurrent, nextSegment) >= 0.0f ? 1.0f : -1.0f;
 
     // Convert to degree and orient it with the sign
-    float angle = sign * RadianToDegree(acosf(dot));
+    float angle = sign * (RadianToDegree(acosf(dot)) +180);
 
     return angle;
 }

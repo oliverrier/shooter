@@ -22,9 +22,15 @@ private:
     CAiController AiController;
     sf::RectangleShape Backgrounds[2];
     CMovementComponent MovementComponent;
-    std::vector<std::vector<CAiEntity>> Waves;
+    std::vector<std::vector<CAiEntity*>> Waves;
     int CurrentWave = 0;
 	std::vector<CBaseProjectileEntity*> PlayerProjectiles;
+    sf::Text TextLife;
+    sf::Text TextEnd;
+    sf::Font Font;
+    bool IsEnd = false;
+    float DelayToEndGame = 0.f;
+    float DelayToNextWave = 0.f;
 
     //functions
     void InitMusic();
@@ -41,7 +47,7 @@ public:
 
     void Update(const float& dt);
     void Render(sf::RenderTarget& target);
-	void SpawnProjectile(CEntity& entity);
+	void SpawnProjectile(CEntity& entity, sf::Vector2f direction, sf::Color color);
 };
 
 #endif

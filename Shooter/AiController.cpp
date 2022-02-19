@@ -1,10 +1,12 @@
 #include "AiController.h"
 #include "AiEntity.h"
+#include "Level.h"
 
 CAiController::CAiController(sf::RenderWindow& window, float maxVelocity): CController(maxVelocity), Window{window}
 {
-
 }
+
+
 
 void CAiController::UpdateLogic(const float& dt, CAiEntity& entity, CEntity& targetEntity)
 {
@@ -22,7 +24,23 @@ void CAiController::UpdateLogic(const float& dt, CAiEntity& entity, CEntity& tar
 	sf::Vector2f directionToTargetEntity = GetDirection(entityPosition, targetEntityPosition);
 	Move(dt, entity.GetSprite(), directionToDestination.x, directionToDestination.y);
 
-	if ((entityPosition.x != 0.f || entityPosition.y != 0.f) && (targetEntityPosition.x != 0.f || targetEntityPosition.y != 0.f)) {
-		SetRotation(entity.GetSprite(), GetAngleBetweenVector(directionToTargetEntity, directionToDestination));
+	if ((entityPosition.x != 0.f || entityPosition.y != 0.f) && (directionToTargetEntity.x != 0.f || directionToTargetEntity.y != 0.f)) {
+		const float angle = GetAngleBetweenVector(directionToTargetEntity, entityPosition);
+		SetRotation(entity.GetSprite(), angle);
 	}
+
+	if (!entity.GetCanShoot()) {
+		entity.SetDelayToShootAgain(entity.GetDelayToShootAgain() + dt);
+		if (entity.GetDelayToShootAgain() > entity.GetMaxDelayToShootAgain()) {
+			entity.SetCanShoot(true);
+			entity.SetDelayToShootAgain(0.f);
+			entity.SetMaxDelayToShootAgain((float)getRandomInt(1,5));
+		}
+	}
+
+	if (entity.GetCanShoot()) {
+		entity.GetCurrentLevel().SpawnProjectile(entity, Normalized(directionToTargetEntity), sf::Color::Red);
+		entity.SetCanShoot(false);
+	}
+
 }

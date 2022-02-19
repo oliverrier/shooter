@@ -32,7 +32,7 @@ void CPlayerController::UpdateLogic(const float& dt, CPlayerEntity& player)
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && player.GetChildEntities()["SOLAR_WEAPON"] != nullptr && canShoot) {
-		player.GetCurrentLevel().SpawnProjectile(player);
+		player.GetCurrentLevel().SpawnProjectile(player, { 1.f, 0.f }, sf::Color::Cyan);
 		canShoot = false;
 	}
 

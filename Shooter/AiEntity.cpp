@@ -1,8 +1,11 @@
 #include "AiEntity.h"
 
 
-CAiEntity::CAiEntity(const char* name, sf::Sprite sprite):CEntity(name, sprite)
+CAiEntity::CAiEntity(const char* name, sf::Sprite sprite, CLevel& currentLevel) :CPlayerEntity(name, sprite, currentLevel), MaxDelayToShootAgain(getRandomInt(1,5))
 {
+	MaxLife = 5;
+	CurrentLife = 5;
+
 	sf::Vector2f startPosition;
 	startPosition.y = (float)getRandomInt(80, 1000);
 	startPosition.x = 2000;
@@ -15,6 +18,10 @@ CAiEntity::CAiEntity(const char* name, sf::Sprite sprite):CEntity(name, sprite)
 
 
 	Destination = startPosition;
+}
+
+CAiEntity::~CAiEntity()
+{
 }
 
 const sf::Vector2f& CAiEntity::GetDestination()
@@ -35,3 +42,30 @@ void CAiEntity::SetRandomDestination(sf::RenderWindow& Window)
 	Destination.x = (float)getRandomInt((int)globalBounds.width, (int)(viewport.width - globalBounds.width));
 	Destination.y = (float)getRandomInt((int)globalBounds.height, (int)(viewport.height - globalBounds.height));
 }
+
+bool& CAiEntity::GetCanShoot()
+{
+	return CanShoot;
+}
+
+void CAiEntity::SetCanShoot(bool canShoot)
+{
+	CanShoot = canShoot;
+}
+
+const float& CAiEntity::GetDelayToShootAgain()
+{
+	return DelayToShootAgain;
+}
+
+void CAiEntity::SetDelayToShootAgain(float delayToShootAgain)
+{
+	DelayToShootAgain = delayToShootAgain;
+}
+
+const float& CAiEntity::GetMaxDelayToShootAgain() {
+	return MaxDelayToShootAgain;
+};
+void CAiEntity::SetMaxDelayToShootAgain(float maxDelayToShootAgain) {
+	MaxDelayToShootAgain = maxDelayToShootAgain;
+};

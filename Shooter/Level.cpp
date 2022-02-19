@@ -1,11 +1,11 @@
 #include "Level.h"
 #include "PauseMenu.h"
-
+#include <string>
 CLevel::CLevel(sf::RenderWindow& window, std::stack<CScene*>& states) : CScene(window, states),
 PlayerEntity(CPlayerEntity("PLAYER", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BASE_IDLE")), *this)),
 PlayerController(CPlayerController(Window, 250)),
 ProjectileController(CBaseProjectileController(500)),
-AiController(CAiController(Window, 150)),
+AiController(CAiController(Window, 200)),
 MovementComponent(CMovementComponent(100.f))
 {
 	InitBackgrounds();
@@ -16,6 +16,16 @@ MovementComponent(CMovementComponent(100.f))
 	PlayerEntity.SetChildEntity(weapon);
 	weapon->GetSprite().setScale({ 0.4f, 0.4f });
 	weapon->GetSprite().setPosition(GetPositionMiddleRight(weapon->GetSprite(), PlayerEntity.GetSprite()));
+
+	Font.loadFromFile("asset/font/Space.ttf");
+
+	TextLife.setFont(Font);
+	TextLife.setString( to_string(PlayerEntity.GetCurrentLife()) + "/" + to_string(PlayerEntity.GetMaxLife()) + "pv");
+	TextLife.setFillColor(sf::Color::Green);
+	TextLife.setCharacterSize(50);
+
+	TextEnd.setFont(Font);
+	TextEnd.setCharacterSize(300);
 }
 
 CLevel::~CLevel()
@@ -43,25 +53,25 @@ void CLevel::InitBackgrounds()
 
 void CLevel::InitWaves()
 {
-	Waves.push_back(std::vector<CAiEntity>{ 
-		CAiEntity("AiSlime", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_SLIME"))),
-		CAiEntity("AiRed", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_RED"))),
-		CAiEntity("AiGreen", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_GREEN"))),
+	Waves.push_back(std::vector<CAiEntity*>{ 
+		new CAiEntity("AiSlime", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_SLIME")), *this),
+			new CAiEntity("AiRed", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_RED")), *this),
+			new CAiEntity("AiGreen", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_GREEN")), *this),
 	});
-	Waves.push_back(std::vector<CAiEntity>{
-		CAiEntity("AiPurple", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_PURPLE"))),
-		CAiEntity("AiPink", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_PINK"))),
-		CAiEntity("AiDark", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_DARK"))),
-		CAiEntity("AiBlack", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BLACK"))),
+	Waves.push_back(std::vector<CAiEntity*>{
+		new CAiEntity("AiPurple", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_PURPLE")), *this),
+			new CAiEntity("AiPink", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_PINK")), *this),
+			new CAiEntity("AiDark", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_DARK")), *this),
+			new CAiEntity("AiBlack", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BLACK")), *this),
 	});
-	Waves.push_back(std::vector<CAiEntity>{
-		CAiEntity("AiSlime2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_SLIME"))),
-		CAiEntity("AiRed2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_RED"))),
-		CAiEntity("AiGreen2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_GREEN"))),
-		CAiEntity("AiPurple2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_PURPLE"))),
-		CAiEntity("AiPink2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_PINK"))),
-		CAiEntity("AiDark2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_DARK"))),
-		CAiEntity("AiBlack2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BLACK"))),
+	Waves.push_back(std::vector<CAiEntity*>{
+		new CAiEntity("AiSlime2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_SLIME")), *this),
+			new CAiEntity("AiRed2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_RED")), *this),
+			new CAiEntity("AiGreen2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_GREEN")), *this),
+			new CAiEntity("AiPurple2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_PURPLE")), *this),
+			new CAiEntity("AiPink2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_PINK")), *this),
+			new CAiEntity("AiDark2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_DARK")), *this),
+			new CAiEntity("AiBlack2", sf::Sprite(CTextureDictionary::GetTexture("SPACESHIP_BLACK")), *this),
 	});
 }
 
@@ -91,21 +101,74 @@ void CLevel::UpdateBackground(const float& dt)
 
 void CLevel::Update(const float& dt)
 {
+	if (IsEnd)
+	{
+		DelayToEndGame += dt;
+		if (DelayToEndGame >= 3)
+		{
+			SetNumberOfTopScenesToDelete(1);
+		}
+		return;
+	}
+
 	UpdateMousePosition();
 	UpdateInput(dt);
 	UpdateBackground(dt);
 
 	PlayerController.UpdateLogic(dt, PlayerEntity);
 
-	for (auto& wave : Waves[CurrentWave])
+	for (int i = 0; i < Waves[CurrentWave].size(); i++)
 	{
-		AiController.UpdateLogic(dt, wave, PlayerEntity);
+		CAiEntity* wave = Waves[CurrentWave][i];
+
+		if (wave->GetCurrentLife() <= 0)
+		{
+			auto it = std::next(Waves[CurrentWave].begin(), i);
+			if (it != Waves[CurrentWave].end())
+			{
+				delete wave;
+				wave = nullptr;
+				Waves[CurrentWave].erase(it);
+			}
+			continue;
+		}
+		AiController.UpdateLogic(dt, *wave, PlayerEntity);
 	}
 
 	for (int i = 0; i < PlayerProjectiles.size(); i++)
 	{
-		ProjectileController.UpdateLogic(dt, PlayerProjectiles[i], Waves[CurrentWave], PlayerProjectiles, i);
+		ProjectileController.UpdateLogic(dt, PlayerProjectiles[i], Waves[CurrentWave], PlayerEntity, PlayerProjectiles, i);
 	}
+
+	TextLife.setString(to_string(PlayerEntity.GetCurrentLife()) + "/" + to_string(PlayerEntity.GetMaxLife()) + "pv");
+
+	if (PlayerEntity.GetCurrentLife() <= 0)
+	{
+		TextEnd.setFillColor(sf::Color::Red);
+		TextEnd.setString("DEFAITE");
+		const sf::FloatRect viewport = (sf::FloatRect)Window.getViewport(Window.getView());
+		const auto textEndGlobalBound = TextEnd.getGlobalBounds();
+		const float centerXOfWindow = viewport.width / 2.f - textEndGlobalBound.width / 2;
+		const float centerYOfWindow = viewport.height / 2.f - textEndGlobalBound.height;
+		TextEnd.setPosition({ centerXOfWindow, centerYOfWindow });
+		IsEnd = true;
+	}
+
+	if (Waves[CurrentWave].size() == 0)
+	{
+		if (++CurrentWave > Waves.size() - 1)
+		{
+			TextEnd.setFillColor(sf::Color::Green);
+			TextEnd.setString("Victoire");
+			const sf::FloatRect viewport = (sf::FloatRect)Window.getViewport(Window.getView());
+			const auto textEndGlobalBound = TextEnd.getGlobalBounds();
+			const float centerXOfWindow = viewport.width / 2.f - textEndGlobalBound.width / 2;
+			const float centerYOfWindow = viewport.height / 2.f - textEndGlobalBound.height;
+			TextEnd.setPosition({ centerXOfWindow, centerYOfWindow });
+			IsEnd = true;
+		}
+	}
+
 }
 
 void CLevel::Render(sf::RenderTarget& target)
@@ -114,22 +177,40 @@ void CLevel::Render(sf::RenderTarget& target)
 	{
 		target.draw(background);
 	}
-	PlayerEntity.Render(target);
-	for (auto& wave : Waves[CurrentWave])
+
+	if (!IsEnd)
 	{
-		target.draw(wave.GetSprite());
-	}
-	for (auto& projectile : PlayerProjectiles)
-	{
-		if (projectile != nullptr) {
-			target.draw(projectile->GetSprite());
+		PlayerEntity.Render(target);
+
+		for (auto& wave : Waves[CurrentWave])
+		{
+			target.draw(wave->GetSprite());
 		}
+		for (auto& projectile : PlayerProjectiles)
+		{
+			if (projectile != nullptr) {
+				target.draw(projectile->GetSprite());
+			}
+		}
+		target.draw(TextLife);
 	}
+	else {
+		target.draw(TextEnd);
+	}
+
 }
 
-void CLevel::SpawnProjectile(CEntity& entity) {
-	CBaseProjectileEntity* projectile = new CBaseProjectileEntity("BASE_PROJECTILE", sf::Sprite(CTextureDictionary::GetTexture("BASE_PROJECTILE")));
+void CLevel::SpawnProjectile(CEntity& entity, sf::Vector2f direction, sf::Color color) {
+	CBaseProjectileEntity* projectile = new CBaseProjectileEntity("BASE_PROJECTILE", sf::Sprite(CTextureDictionary::GetTexture("BASE_PROJECTILE")), direction);
+	projectile->GetSprite().setColor(color);
 	projectile->GetSprite().setPosition(GetPositionMiddleRight(projectile->GetSprite(), entity.GetSprite()));
+
+	const sf::Vector2f projectilePosition = projectile->GetSprite().getPosition();
+	if (color == sf::Color::Red && (projectilePosition.x != 0.f || projectilePosition.y != 0.f) && (direction.x != 0.f || direction.y != 0.f)) {
+		const float angle = GetAngleBetweenVector(direction, projectilePosition);
+		projectile->GetSprite().setRotation(angle);
+	}
+
 	PlayerProjectiles.push_back(projectile);
 
 }

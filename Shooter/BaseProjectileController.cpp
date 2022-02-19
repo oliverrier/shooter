@@ -1,6 +1,7 @@
 #include "BaseProjectileController.h"
 #include "BaseProjectileEntity.h"
 #include "AiEntity.h"
+#include "PlayerEntity.h"
 
 
 
@@ -14,20 +15,27 @@ CBaseProjectileController::~CBaseProjectileController()
 {
 }
 
-void CBaseProjectileController::UpdateLogic(const float& dt, CBaseProjectileEntity* entity, std::vector<CAiEntity> vectorAi, std::vector<CBaseProjectileEntity*>& playerProjectiles, int indexToRemove)
+void CBaseProjectileController::UpdateLogic(const float& dt, CBaseProjectileEntity* entity, std::vector<CAiEntity*>& vectorAi, 
+	CPlayerEntity& player, std::vector<CBaseProjectileEntity*>& playerProjectiles, int indexToRemove)
 {
-	float directionX = 1.f;
-	float directionY = 0.f;
-	Move(dt, entity->GetSprite(), directionX, directionY);
 
-	for (auto& child : entity->GetChildEntities())
-	{
-		Move(dt, child.second->GetSprite(), directionX, directionY);
+
+	sf::Vector2f directionToDestination = entity->GetDirection();
+	Move(dt, entity->GetSprite(), directionToDestination.x, directionToDestination.y);
+
+
+	if (entity->GetSprite().getColor() == sf::Color::Red && entity->isColliding(player)) {
+		player.SetCurrentLife(player.GetCurrentLife() - entity->GetDamage());
+		delete entity;
+		entity = nullptr;
+		playerProjectiles.erase(std::next(playerProjectiles.begin(), indexToRemove));
+		return;
 	}
 
 	for (auto& ai : vectorAi)
 	{
-		if (entity->isColliding(ai)) {
+		if (entity->GetSprite().getColor() == sf::Color::Cyan && entity->isColliding(*ai)) {
+			ai->SetCurrentLife(ai->GetCurrentLife() - entity->GetDamage());
 			delete entity;
 			entity = nullptr;
 			playerProjectiles.erase(std::next(playerProjectiles.begin(), indexToRemove));
@@ -35,6 +43,5 @@ void CBaseProjectileController::UpdateLogic(const float& dt, CBaseProjectileEnti
 		}
 
 	}
-
 
 }

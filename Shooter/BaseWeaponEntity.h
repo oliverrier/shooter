@@ -10,6 +10,6 @@ public:
 	CBaseWeaponEntity(const char* name, sf::Sprite sprite);
 	~CBaseWeaponEntity();
 
-	void Use();
+	//void Use();
 };
 
